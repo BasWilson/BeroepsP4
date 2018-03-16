@@ -6,16 +6,11 @@ console.log(n);
 $( document ).ready(function() {
   welkomsBericht();
   $('.wrapper').fadeIn(500);
+
 });
 
 
-$(".studentCard").on('hover', function() {
-        var $txt = $("#txt");
-        var caretPos = $txt[0].selectionStart;
-        var textAreaTxt = $txt.val();
-        var txtToAdd = "Edit";
-        $txt.val(textAreaTxt.substring(0, caretPos) + txtToAdd + textAreaTxt.substring(caretPos) );
-    });
+
 
 function welkomsBericht() {
   var src;

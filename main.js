@@ -17,6 +17,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', function(req, res){
 res.sendFile(__dirname + '/views/dashboard.htm');
 });
+app.get('/dashboard', function(req, res){
+res.sendFile(__dirname + '/views/dashboard.htm');
+});
 app.get('/home', function(req, res){
 res.sendFile(__dirname + '/views/dashboard.htm');
 });
@@ -25,6 +28,9 @@ res.sendFile(__dirname + '/views/leerlingen.htm');
 });
 app.get('/klassen', function(req, res){
 res.sendFile(__dirname + '/views/klassen.htm');
+});
+app.get('/login', function(req, res){
+res.sendFile(__dirname + '/views/login.htm');
 });
 //SOCKET CONNECTIONS
 io.on('connection', function(socket){
