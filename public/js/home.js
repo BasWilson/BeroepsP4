@@ -9,9 +9,6 @@ $( document ).ready(function() {
 
 });
 
-
-
-
 function welkomsBericht() {
   var src;
   if (n >= 0 && n <= 5) {
@@ -28,3 +25,22 @@ function welkomsBericht() {
   }
   document.getElementById('welcomeMessage').innerHTML = welcomeMessage;
 }
+
+$('#profileBtn').click(function () {
+  hideAllViews();
+  showProfile();
+});
+
+$('#classesBtn').click(function () {
+  hideAllViews();
+  loadClasses();
+});
+
+$('#studentsBtn').click(function () {
+  hideAllViews();
+  getStudents();
+});
+
+$('#logoutBtn').click(function () {
+  logout();
+});

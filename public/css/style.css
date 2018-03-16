@@ -72,13 +72,14 @@ ul {
   cursor: pointer;
 }
 .centerContainer {
-  width: 80%;
+  width: 60%;
   height: 80%;
   margin: auto;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
 .headerContainer {
@@ -102,9 +103,21 @@ ul {
   margin: 20px;
 }
 
+.marginTopBottom {
+  margin: 10px 0px 10px 0px;
+}
+
+.marginBottom {
+  margin: 0px 0px 10px 0px;
+}
+
+.marginTop {
+  margin: 10px 0px 0px 0px;
+}
 .marginLeftRight {
   margin: 0px 5px 0px 5px;
 }
+
 
 footer {
   color: black;
@@ -142,14 +155,80 @@ footer {
   color: black;
 }
 
-.cardBig {
-  padding: 20px;
+.cardText {
+  color: black;
+}
+
+.studentCardDiv {
+  padding: 10px;
   background-color: white;
   border-radius: 10px;
   display: flex;
-  flex: column;
+  flex-wrap: wrap;
+  width: auto !important;
 }
 
+.classCardDiv {
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  width: auto !important;
+}
+
+.profileCardDiv {
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.profileCardDivSide {
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+  display: none;
+  flex-direction: column;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  text-align: center;
+}
+
+.dashboardCardDiv {
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.profileCardImage {
+  width: 150px;
+  height: 150px;
+
+  border-radius: 100px;
+}
+
+#hideStudentsCard {
+  display: none;
+}
+
+#hideProfileCard {
+  display: none;
+}
+
+#hideClassesCard {
+  display: none;
+}
+.loader {
+  width: 70px;
+  transition: all 0.4s ease;
+  margin: auto;
+  display: none;
+}
 .studentCard {
   padding: 10px;
   background-color: rgb(246, 229, 255);
@@ -158,15 +237,16 @@ footer {
   width: 150px;
   height: 70px;
   margin: auto;
-  margin-left: 10px;
-  margin-right: 10px;
   font-weight: bold;
   transition: all 0.15s ease;
 }
 
+.invisiblePadding {
+  padding: 10px;
+}
 .studentCard:hover {
   cursor: pointer;
-  transform: scale(1.05);
+  transform: scale(.95);
 }
 
 .leftSide {
@@ -194,9 +274,12 @@ footer {
   padding: 10px;
 }
 
-.studentItem {
-  margin-right: 2.5px;
-  margin-left: 2.5px;
+#logoutBtn {
+  display: none;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: white;
 }
 
 .studentName {
@@ -220,12 +303,41 @@ footer {
   font-size: 22px;
 }
 
-.cardOverlay {
-  display: none;
-  width: 100%;
-  height: 100%;
+.classCard {
+  padding: 10px;
   background-color: rgb(246, 229, 255);
+  border-radius: 10px;
+  position: relative;
+  width: 150px;
+  height: 70px;
+  margin: auto;
+  text-align: left;
   transition: all 0.15s ease;
+}
+
+.classCard:hover {
+  transform: scale(.95);
+  cursor: pointer;
+}
+.className {
+  color: black;
+  font-size: 16px;
+}
+
+.classAvatar {
+  height: auto;
+  width: 70px;
+}
+
+.classPoints {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: DodgerBlue;
+  border-radius: 100px;
+  padding: 5px;
+  border: 1px solid white;
+  font-size: 22px;
 }
 
 .textfield {
@@ -253,4 +365,22 @@ footer {
 .button:hover {
   transform: scale(.95);
   cursor: pointer;
+}
+
+.dashboardCard {
+  padding: 10px;
+  background-color: rgb(246, 229, 255);
+  border-radius: 10px;
+  position: relative;
+  width: 150px;
+  height: 70px;
+  margin: 10px;
+  font-weight: bold;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+
+.dashboardCard:hover {
+  cursor: pointer;
+  transform: scale(1.05);
 }

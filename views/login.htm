@@ -24,16 +24,16 @@
       <div class="headerContainer">
         <a class="marginAll headerText">Login</a>
         <a class="marginAll" id="welcomeMessage"></a>
-        <a class="marginAll">Om door te gaan kunt u inloggen in het beoordelings systeem.</a>
+        <a class="marginAll">Log in om door te kunnen gaan.</a>
       </div>
     </header>
 
     <section>
       <div class="centerContainer">
-        <div class="cardBig">
+        <div class="dashboardCardDiv">
             <input id="userField" class="textfield" type="name" placeholder="Afkorting"/>
             <input id="passwordField" class="textfield" type="password" placeholder="Wachtwoord"/>
-            <a id="loginBtn" class="button">Login</a>
+            <a id="loginBtn" class="button">Log in</a>
         </div>
       </div>
     </section>
@@ -46,9 +46,10 @@
   </div>
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase-firestore.js"></script>
   <script src="js/home.js"></script>
   <script src="js/nav.js"></script>
-  <script src="js/students.js"></script>
+  <script src="js/fb.js"></script>
   <script src="js/login.js"></script>
 </body>
 </html>

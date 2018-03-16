@@ -20,75 +20,63 @@
 
   <div class="wrapper">
 
-    <div class="navButton hover">
-      <img class="menuButton" src="assets/menublack.png" alt="Menu">
-      <nav>
-        <div class="navigationMenu">
-          <br />
-          <br />
-          <hr />
-          <a class="navItem" href="dashboard">Home</a><br />
-          <a class="navItem" href="leerlingen">Mijn leerlingen</a><br />
-          <a class="navItem" href="klassen">Mijn klassen</a><br />
-        </div>
-      </nav>
-    </div>
-
     <header>
       <div class="headerContainer">
         <a class="marginAll headerText">Dashboard</a>
         <a class="marginAll" id="welcomeMessage"></a>
+        <a class="marginAll" id="description">Wat wilt u doen?</a>
       </div>
     </header>
 
+    <!-- Dit kaartje is om een profiel in te laten zien-->
+    <div class="profileCardDivSide">
+      <!-- Hier komt de data binnen uit de database -->
+      <img class="profileCardImage" src="assets/profile.jpg"/>
+      <p class="cardText marginTop" id="teacherNameSide"></p>
+    </div>
+
+    <!-- Log uit knop-->
+      <a class="button" id="logoutBtn">Log uit</a>
+
     <section>
+
       <div class="centerContainer">
-        <div class="cardBig">
-          <div class="studentCard">
-              <div class="leftSide">
-              <img class="studentAvatar" src="assets/r2.png"/>
-            </div>
-              <div class="rightSide">
-                <a class="studentName">Bas</a>
-                <a class="studentName">W.</a>
-              </div>
-            <a class="studentPoints">10</a>
+
+        <!-- Dit kaartje is om het dashboard in te laten zien -->
+        <div class="dashboardCardDiv" id="hideDashboardCardDiv">
+          <div class="dashboardCard" id="classesBtn">
+            <a class="cardText">Mijn klassen</a>
           </div>
 
-          <div class="studentCard">
-            <div class="leftSide">
-            <img class="studentAvatar" src="assets/r2.png"/>
-          </div>
-            <div class="rightSide">
-              <a class="studentName">Bas</a>
-              <a class="studentName">W.</a>
-            </div>
-            <a class="studentPoints">10</a>
+          <div class="dashboardCard" id="studentsBtn">
+            <a class="cardText">Mijn leerlingen</a>
           </div>
 
-          <div class="studentCard">
-            <div class="leftSide">
-            <img class="studentAvatar" src="assets/r2.png"/>
+          <div class="dashboardCard" id="profileBtn">
+            <a class="cardText">Mijn profiel</a>
           </div>
-            <div class="rightSide">
-              <a class="studentName">Bas</a>
-              <a class="studentName">W.</a>
-            </div>
-            <a class="studentPoints">10</a>
-          </div>
-
-          <div class="studentCard">
-            <div class="leftSide">
-            <img class="studentAvatar" src="assets/r2.png"/>
-          </div>
-            <div class="rightSide">
-              <a class="studentName">Bas</a>
-              <a class="studentName">W.</a>
-            </div>
-            <a class="studentPoints">10</a>
-          </div>
-
         </div>
+
+        <!-- Dit kaartje is om een klas in te laten zien -->
+        <div class="studentCardDiv" id="hideStudentsCard">
+          <!-- Hier komt de data binnen uit de database -->
+        </div>
+
+        <!-- Dit kaartje is om klassen in te laten zien -->
+        <div class="classCardDiv" id="hideClassesCard">
+          <!-- Hier komt de data binnen uit de database -->
+        </div>
+        <!-- Dit kaartje is om een profiel in te laten zien-->
+        <div class="profileCardDiv" id="hideProfileCard">
+          <!-- Hier komt de data binnen uit de database -->
+          <p class="cardText marginBottom">U bent ingelogd als</p>
+          <img class="profileCardImage" src="assets/profile.jpg"/>
+          <p class="cardText marginTop" id="teacherName"></p>
+        </div>
+
+        <!-- Pagina loader, deze fade uit als de data uit de database binnen is -->
+        <img class="loader" src="assets/loader.svg" alt="Laden..">
+
       </div>
     </section>
 
@@ -100,8 +88,10 @@
   </div>
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase-firestore.js"></script>
+
   <script src="js/home.js"></script>
-  <script src="js/nav.js"></script>
+  <script src="js/fb.js"></script>
   <script src="js/students.js"></script>
 </body>
 </html>
