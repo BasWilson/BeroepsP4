@@ -21,7 +21,7 @@ function getStudents (user) {
 
   var dbFNames = [], dbLNames = [], dbPoints = [], dbAvatars = [];
 
-  var teachers = db.collection('teachers').doc("crwDpW5Yaqb2SHZv1Aaf6kqmbNv1").collection("q95r2DJH2STnDzew77sE");
+  var teachers = firebase.collection('teachers').doc("crwDpW5Yaqb2SHZv1Aaf6kqmbNv1").collection("q95r2DJH2STnDzew77sE");
   var getDoc = titleRef.get()
       .then(doc => {
           if (!doc.exists) {
