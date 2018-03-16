@@ -14,24 +14,18 @@ var fb = require('./modules/fb');
 //HANDLE PAGES HERE
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-app.get('/requestcard', function(req, res){
-  var data = { //paramaters
-    name: req.query.reason,
-    points: req.query.dateTime,
-    uid: req.query.uid,
-    avatar: ,
-    class: ,
-    confirmed: false
-  };
-  cards.createCard(data);
-  setTimeout(function() {
-    var confirmed = data.confirmed;
-    res.send(confirmed);
-  },3000)
-  console.log("user: "+data.uid+", requested a card, with data: " + data.reason );
+app.get('/', function(req, res){
+res.sendFile(__dirname + '/views/dashboard.htm');
 });
-
+app.get('/home', function(req, res){
+res.sendFile(__dirname + '/views/dashboard.htm');
+});
+app.get('/leerlingen', function(req, res){
+res.sendFile(__dirname + '/views/leerlingen.htm');
+});
+app.get('/klassen', function(req, res){
+res.sendFile(__dirname + '/views/klassen.htm');
+});
 //SOCKET CONNECTIONS
 io.on('connection', function(socket){
 
