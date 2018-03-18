@@ -175,6 +175,16 @@ footer {
   flex-wrap: wrap;
 }
 
+.singleStudentDiv {
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  display: none;
+}
+
 .profileCardDiv {
   padding: 10px;
   background-color: white;
@@ -328,6 +338,10 @@ footer {
   width: 70px;
 }
 
+.studentAvatarBig {
+  height: auto;
+  width: 96px;
+}
 .studentPoints {
   position: absolute;
   top: -10px;
@@ -358,6 +372,7 @@ footer {
 .className {
   color: black;
   font-size: 16px;
+  margin: auto;
 }
 
 .classAvatar {

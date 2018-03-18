@@ -27,10 +27,10 @@ function welkomsBericht() {
 }
 
 function showPopup(pText) {
+  $('.loader').hide(0);
   $('#popupText').html(pText);
   $('.popupDiv').css('display', 'flex');
   $('.popupDiv').show(200);
-  $('.loader').hide(100);
 }
 
 function closePopup(pText) {
@@ -44,7 +44,6 @@ $('#closePopupBtn').click(function () {
 $('.backBtn').click(function () {
   hideAllViews();
   $('.dashboardCardDiv').show(200);
-  $('.dashboardCardDiv').css('display', 'flex');
 });
 $('#profileBtn').click(function () {
   hideAllViews();

@@ -31,6 +31,8 @@ module.exports = {
                 dbLNames.push(studentData.lastname);
                 dbClass.push(studentData.class);
 
+                var amountOfStudents = doc.data().totalAmount;
+                var newAmountOfStudents = amountOfStudents + 1;
 
                 var studentsRef = db.collection('classes').doc(studentData.class);
 
@@ -39,7 +41,8 @@ module.exports = {
                   lastnames: dbLNames,
                   avatars: dbAvatars,
                   points: dbPoints,
-                  class: dbClass
+                  class: dbClass,
+                  totalAmount: newAmountOfStudents
                 }, { merge: true });
                 socket.emit('studentCreated', studentData.firstname);
             }
@@ -121,7 +124,8 @@ module.exports = {
       lastnames: [],
       avatars: [],
       points: [],
-      class: []
+      class: [],
+      totalAmount: 0
     };
 
     db.collection("classes").doc(name).set(classData).then(function() {

@@ -69,22 +69,39 @@ function hideAllViews() {
   $('.newClassCardDiv').hide(200);
   $('.newClassDiv').hide(200);
   $('.newStudentDiv').hide(200);
+  $('.singleStudentDiv').hide(200);
   $('.classCard').remove('.classCard');
   $('.studentCard').remove('.studentCard');
+  $('.singleStudentCard').remove('.singleStudentCard');
   clearArrays();
   clearCards();
 }
 
+function hideAllViewsWithoutClearingCache() {
+
+  $('.profileCardDiv').hide(200);
+  $('.studentCardDiv').hide(200);
+  $('.dashboardCardDiv').hide(200);
+  $('.classCardDiv').hide(200);
+  $('.extraCardDiv').hide(200);
+  $('.newClassCardDiv').hide(200);
+  $('.newClassDiv').hide(200);
+  $('.newStudentDiv').hide(200);
+  $('.classCard').remove('.classCard');
+  $('.studentCard').remove('.studentCard');
+  $('.singleStudentCard').remove('.singleStudentCard');
+
+}
 function showProfile() {
 
   loadProfile();
 
+  $('.loader').hide(100);
   $('#teacherName').html('<strong>'+data.name+'</strong>');
   $('.headerText').text('Profiel');
   $('#description').text('Hier kunt u uw profiel bekijken en aanpassen');
   $('.profileCardDiv').css('display', 'flex');
   $('.profileCardDiv').show(400);
-  $('.loader').hide(100);
 
 }
 
@@ -119,16 +136,15 @@ function loadClasses() {
               for (var i = 0; i < dbClass.length; i++) {
 
                 var firstNamesHTML = '<a class="className"><strong>'+dbClass[i]+'</strong></a>';
-                var lastNamesHTML = '<a class="className">20 leerlingen</a>';
                 //var pointsHTML = '<a class="classPoints">'+dbPoints[i]+'</a>';
                 var avatarsHTML = '<img class="classAvatar" src="assets/class.png"/>';
 
                 var leftSideHTML = '<div class="leftSide">'+avatarsHTML+'</div>';
-                var rightSideHTML = '<div class="rightSide">'+firstNamesHTML+lastNamesHTML+'</div>';
+                var rightSideHTML = '<div class="rightSide">'+firstNamesHTML+'</div>';
                 var studentCardHTML = '<div onclick="getClassName(this.id)" id="'+dbClass[i]+'" class="classCard" >'+leftSideHTML+rightSideHTML+'</div>';
 
                 $('.classCardDiv').append(studentCardHTML);
-                $('.loader').hide(100);
+                $('.loader').hide(0);
                 $('.classCardDiv').css('display', 'flex');
                 $('.classCardDiv').show(400);
 
@@ -145,6 +161,9 @@ function getStudents (allStudents) {
   $('.headerText').html('Leerlingen uit klas <strong>'+data.className+'</strong>');
   $('#description').text('Klik op een leerling voor meer informatie');
 
+  if (allStudents == true) {
+    $('.headerText').html('Al uw leerlingen');
+  }
   var studentsRef = db.collection('classes').doc(data.className);
   var getDoc = studentsRef.get()
       .then(doc => {
@@ -164,8 +183,9 @@ function getStudents (allStudents) {
 
               if (dbFNames == "" && allStudents == false) {
                 showPopup(pText = 'Deze klas heeft geen leerlingen');
-                $('.loader').hide(100);
+                $('.loader').hide(0);
               }
+
               console.log(dbFNames);
               console.log(dbLNames);
               console.log(dbPoints);
@@ -183,13 +203,13 @@ function getStudents (allStudents) {
 
                 var leftSideHTML = '<div class="leftSide">'+avatarsHTML+'</div>';
                 var rightSideHTML = '<div class="rightSide">'+firstNamesHTML+lastNamesHTML+'</div>';
-                var studentCardHTML = '<div class="studentCard" id="'+i+'">'+leftSideHTML+rightSideHTML+pointsHTML+'</div>';
+                var studentCardHTML = '<div class="studentCard" onclick="openEditStudent(this.id)" id="'+i+'">'+leftSideHTML+rightSideHTML+pointsHTML+'</div>';
 
                 $('.studentCardDiv').append(studentCardHTML);
-                $('.loader').hide(100);
 
               }
 
+              $('.loader').hide(0);
               $('.studentCardDiv').css('display', 'flex');
               $('.studentCard').css('margin', 'auto');
               $('.studentCard').css('marginBottom', '10px');
@@ -238,6 +258,22 @@ function getAllStudents () {
   })
 
 }
+
+function openEditStudent(id) {
+
+  $('.headerText').html();
+  $('#description').html('Bekijk hier de gegevens van <strong>'+dbFNames[id] + ' ' +dbLNames[id]+'</strong>');
+  hideAllViewsWithoutClearingCache();
+
+  var nameHTML = '<p class="cardText marginBottom"><strong>'+dbFNames[id] + ' ' +dbLNames[id]+'</strong></p>';
+  var avatarHTML = '<img class="studentAvatarBig" src="'+dbAvatars[id]+'"/>';
+  var singleStudentDivHTML = '<div class="singleStudentCard">'+nameHTML+avatarHTML+'</div>';
+  $('.singleStudentDiv').append(singleStudentDivHTML);
+
+  $('.singleStudentDiv').css('display', 'flex');
+  $('.singleStudentDiv').show(400);
+}
+
 function openNewClass() {
 
   $('.headerText').html('Nieuwe klas');
