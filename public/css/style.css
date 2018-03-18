@@ -165,7 +165,6 @@ footer {
   border-radius: 10px;
   display: flex;
   flex-wrap: wrap;
-  width: auto !important;
 }
 
 .classCardDiv {
@@ -174,7 +173,6 @@ footer {
   border-radius: 10px;
   display: flex;
   flex-wrap: wrap;
-  width: auto !important;
 }
 
 .profileCardDiv {
@@ -183,6 +181,7 @@ footer {
   border-radius: 10px;
   display: flex;
   flex-direction: column;
+  margin: 20px;
 }
 
 .profileCardDivSide {
@@ -205,10 +204,46 @@ footer {
   flex-direction: row;
 }
 
+.extraCardDiv {
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  display: none;
+}
+
+.newClassDiv {
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  display: none;
+}
+
+.newStudentDiv {
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  display: none;
+}
+
+.popupDiv {
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  display: none;
+  z-index: 9999;
+}
+
 .profileCardImage {
   width: 150px;
   height: 150px;
-
   border-radius: 100px;
 }
 
@@ -223,6 +258,7 @@ footer {
 #hideClassesCard {
   display: none;
 }
+
 .loader {
   width: 70px;
   transition: all 0.4s ease;
@@ -236,7 +272,7 @@ footer {
   position: relative;
   width: 150px;
   height: 70px;
-  margin: auto;
+  margin: 10px;
   font-weight: bold;
   transition: all 0.15s ease;
 }
@@ -310,7 +346,7 @@ footer {
   position: relative;
   width: 150px;
   height: 70px;
-  margin: auto;
+  margin: 10px;
   text-align: left;
   transition: all 0.15s ease;
 }

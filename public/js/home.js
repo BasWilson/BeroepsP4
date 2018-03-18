@@ -26,6 +26,26 @@ function welkomsBericht() {
   document.getElementById('welcomeMessage').innerHTML = welcomeMessage;
 }
 
+function showPopup(pText) {
+  $('#popupText').html(pText);
+  $('.popupDiv').css('display', 'flex');
+  $('.popupDiv').show(200);
+  $('.loader').hide(100);
+}
+
+function closePopup(pText) {
+  $('.popupDiv').hide(200);
+  showDashboard();
+}
+$('#closePopupBtn').click(function () {
+  closePopup();
+});
+
+$('.backBtn').click(function () {
+  hideAllViews();
+  $('.dashboardCardDiv').show(200);
+  $('.dashboardCardDiv').css('display', 'flex');
+});
 $('#profileBtn').click(function () {
   hideAllViews();
   showProfile();
@@ -33,14 +53,39 @@ $('#profileBtn').click(function () {
 
 $('#classesBtn').click(function () {
   hideAllViews();
+  clearArrays();
+  clearCards();
   loadClasses();
 });
 
 $('#studentsBtn').click(function () {
   hideAllViews();
-  getStudents();
+  getAllStudents();
 });
 
 $('#logoutBtn').click(function () {
   logout();
+});
+
+$('#extraBtn').click(function () {
+  hideAllViews();
+  openExtra();
+});
+$('#newClassBtn').click(function () {
+  hideAllViews();
+  openNewClass();
+});
+$('#createNewClassBtn').click(function () {
+  hideAllViews();
+  createNewClass();
+});
+
+$('#addStudentBtn').click(function () {
+  hideAllViews();
+  openNewStudent();
+});
+
+$('#createNewStudentBtn').click(function () {
+  hideAllViews();
+  createNewStudent();
 });

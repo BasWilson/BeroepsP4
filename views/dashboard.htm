@@ -42,7 +42,13 @@
 
       <div class="centerContainer">
 
-        <!-- Dit kaartje is om het dashboard in te laten zien -->
+        <!-- Dit is het popup venster -->
+        <div class="popupDiv">
+          <a class="cardText marginAll" id="popupText"></a>
+          <a class="cardText button" id="closePopupBtn">Sluit</a>
+        </div>
+
+        <!-- Dit kaartje is om het dashboard te laten zien -->
         <div class="dashboardCardDiv" id="hideDashboardCardDiv">
           <div class="dashboardCard" id="classesBtn">
             <a class="cardText">Mijn klassen</a>
@@ -55,17 +61,78 @@
           <div class="dashboardCard" id="profileBtn">
             <a class="cardText">Mijn profiel</a>
           </div>
+
+          <div class="dashboardCard" id="extraBtn">
+            <a class="cardText">Extra</a>
+          </div>
         </div>
 
-        <!-- Dit kaartje is om een klas in te laten zien -->
+
+        <!-- Dit kaartje is om de extra opties te laten zien -->
+        <div class="extraCardDiv" id="hideExtraCardDiv">
+          <div class="dashboardCard backBtn">
+            <a class="cardText">Ga terug...</a>
+          </div>
+          <div class="dashboardCard" id="newClassBtn">
+            <a class="cardText">Nieuwe klas</a>
+          </div>
+
+        </div>
+
+        <!-- Dit kaartje is om de nieuwe klassen aan te maken -->
+        <div class="newClassDiv" id="hideNewClassCardDiv">
+          <div class="dashboardCard backBtn">
+            <a class="cardText">Ga terug...</a>
+          </div>
+            <input class="textfield" placeholder="Klas naam" id="classNameField" type="text"/>
+            <a class="cardText button" id="createNewClassBtn">Maak aan</a>
+        </div>
+
+        <!-- Dit kaartje is om de nieuwe studenten aan te maken -->
+        <div class="newStudentDiv">
+          <div class="dashboardCard backBtn">
+            <a class="cardText">Ga terug...</a>
+          </div>
+          <input class="textfield" placeholder="Voornaam" id="firstNameField" type="text"/>
+          <input class="textfield" placeholder="Achternaam" id="lastNameField" type="text"/>
+          <input class="textfield" placeholder="Aantal punten" id="pointsField" type="number"/>
+          <select class="textfield select" placeholder="Klas" id="classSelect">
+          </select>
+          <select class="textfield" placeholder="Avatar" id="avatarSelect">
+            <option value="assets/r2.png">R2-D2</option>
+          </select>
+            <a class="cardText button" id="createNewStudentBtn">Maak aan</a>
+        </div>
+
+        <!-- Dit kaartje is om een klas te laten zien -->
         <div class="studentCardDiv" id="hideStudentsCard">
           <!-- Hier komt de data binnen uit de database -->
+          <div class="dashboardCard backBtn">
+            <a class="cardText">Ga terug...</a>
+          </div>
+          <div class="dashboardCard" id="summaryBtn">
+            <a class="cardText">Overzicht</a>
+          </div>
+          <div class="dashboardCard" id="addStudentBtn">
+            <a class="cardText">Nieuwe leerling</a>
+          </div>
         </div>
 
         <!-- Dit kaartje is om klassen in te laten zien -->
         <div class="classCardDiv" id="hideClassesCard">
           <!-- Hier komt de data binnen uit de database -->
+          <div class="dashboardCard backBtn">
+            <a class="cardText">Ga terug...</a>
+          </div>
         </div>
+
+        <!-- Dit kaartje is om een profiel in te laten zien-->
+        <div class="profileCardDiv" id="hideProfileCard">
+          <div class="dashboardCard backBtn">
+            <a class="cardText">Ga terug...</a>
+          </div>
+        </div>
+
         <!-- Dit kaartje is om een profiel in te laten zien-->
         <div class="profileCardDiv" id="hideProfileCard">
           <!-- Hier komt de data binnen uit de database -->
@@ -73,6 +140,9 @@
           <img class="profileCardImage" src="assets/profile.jpg"/>
           <p class="cardText marginTop" id="teacherName"></p>
         </div>
+
+
+
 
         <!-- Pagina loader, deze fade uit als de data uit de database binnen is -->
         <img class="loader" src="assets/loader.svg" alt="Laden..">
@@ -89,9 +159,10 @@
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase-firestore.js"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
   <script src="js/home.js"></script>
   <script src="js/fb.js"></script>
   <script src="js/students.js"></script>
+  <script src="js/socket.js"></script>
 </body>
 </html>

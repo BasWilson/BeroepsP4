@@ -1,38 +1,47 @@
 module.exports = {
 
-  addStudentToDB: function (data) {
+  addStudentToDB: function (studentData, socket) {
 
-    var dbNames = [], dbPoints = [], dbAvatars = [];
+    var dbFNames = [], dbLNames = [], dbPoints = [], dbAvatars = [], dbClass = [];
 
-    var titleRef = db.collection('teachers').doc(data.uid);
+    var titleRef = db.collection('classes').doc(studentData.class);
     var getDoc = titleRef.get()
         .then(doc => {
             if (!doc.exists) {
-                console.log('Leraar bestaat niet');
+                console.log('Klas bestaat niet');
             } else {
 
-                dbNames = doc.data().names;
+
+                dbFNames = doc.data().firstnames;
+                dbLNames = doc.data().lastnames;
                 dbPoints = doc.data().points;
                 dbAvatars = doc.data().avatars;
+                dbClass = doc.data().class;
 
-                console.log(dbNames);
+                console.log(dbFNames);
+                console.log(dbLNames);
                 console.log(dbPoints);
                 console.log(dbAvatars);
+                console.log(dbClass);
+                studentPoints = parseInt(studentData.points);
 
-                dbNames.push(data.name);
-                dbPoints.push(data.points);
-                dbAvatars.push(data.avatar);
+                dbFNames.push(studentData.firstname);
+                dbPoints.push(studentPoints);
+                dbAvatars.push(studentData.avatar);
+                dbLNames.push(studentData.lastname);
+                dbClass.push(studentData.class);
 
 
-                var studentsRef = db.collection('students').doc(data.uid).collection(data.class);
+                var studentsRef = db.collection('classes').doc(studentData.class);
 
                 var setWithOptions = studentsRef.set({
-                  names: dbNames,
+                  firstnames: dbFNames,
+                  lastnames: dbLNames,
+                  avatars: dbAvatars,
                   points: dbPoints,
-                  avatars: dbAvatars
+                  class: dbClass
                 }, { merge: true });
-                data.confirmed = true;
-
+                socket.emit('studentCreated', studentData.firstname);
             }
         })
         .catch(err => {
@@ -105,53 +114,21 @@ module.exports = {
 
   },
 
-  createSubscription: function (data) {
-    var price = 0;
-    var d = new Date();
-    var timestamp = d.setTime()	;
-    var subtype;
-    if (data.subtype == 0) {
-      price = 0;
-      data.confirmed = true;
-    } else if (data.subtype == 1) {
-      price = 2.5;
-      data.confirmed = true;
-    } else if (data.subtype == 2) {
-      price = 5.0;
-      data.confirmed = true;
-    } else {
-      data.confirmed = false;
-    }
+  addClassToDB: function (name, socket) {
 
-    if (data.confirmed == false) {
-      //Stop
-    } else {
-      var userRef = db.collection('users').doc(data.uid);
+    var classData = {
+      firstnames: [],
+      lastnames: [],
+      avatars: [],
+      points: [],
+      class: []
+    };
 
-      var getDoc = userRef.get()
-          .then(doc => {
-              if (!doc.exists) {
-                  console.log('No such document!');
-              } else {
-                  oldMoney = doc.data().balance;
-                  if (oldMoney < price) {
-                    data.confirmed = false;
-                  } else {
-                    var newBalance = oldMoney - price;
-                    subtype = parseInt(data.subtype);
-                    //Create usefull user information
-                    var setUserData = userRef.set({
-                      balance: newBalance,
-                      subscription: subtype,
-                      dateOfPay: "timestamp"
-                    }, { merge: true });
-                    data.confirmed = true;
-                  }
-
-              }
-    })
-    }
-}
+    db.collection("classes").doc(name).set(classData).then(function() {
+        console.log("Nieuwe klas toegevoegd");
+        socket.emit('classCreated');
+    });
+},
 };
 
 var express = require('express');

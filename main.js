@@ -8,6 +8,7 @@ var randomFloat = require('random-float');
 
 //Modules
 var students = require('./modules/students');
+var classes = require('./modules/classes');
 var fb = require('./modules/fb');
 
 
@@ -39,8 +40,9 @@ io.on('connection', function(socket){
   /*
    * De leraar wil een student toevoegen aan zijn/haar klas
   */
-  socket.on('addStudent', function(data){
-    students.addStudentToDB(data);
+  socket.on('createNewStudent', function(studentData){
+    //Student wordt aangemaakt
+    fb.addStudentToDB(studentData, socket);
   });
 
   /*
@@ -64,7 +66,12 @@ io.on('connection', function(socket){
     students.editStudentInDb(data);
   });
 
-
+  /*
+   * De leraar voegt een klas toe
+  */
+  socket.on('createNewClass', function(name){
+    fb.addClassToDB(name, socket);
+  });
 });
 http.listen(8080, function(){
   console.log('Beoordelings Systeem server opgestart');
