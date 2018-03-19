@@ -93,19 +93,37 @@
           <div class="dashboardCard backBtn">
             <a class="cardText">Ga terug...</a>
           </div>
+        </div>
+        <div class="newStudentDiv">
           <input class="textfield" placeholder="Voornaam" id="firstNameField" type="text"/>
           <input class="textfield" placeholder="Achternaam" id="lastNameField" type="text"/>
           <input class="textfield" placeholder="Aantal punten" id="pointsField" type="number"/>
           <select class="textfield select" placeholder="Klas" id="classSelect">
           </select>
           <select class="textfield" placeholder="Avatar" id="avatarSelect">
+            <option value="assets/monkey.png">Aap</option>
+            <option value="assets/batman.png">Batman</option>
+            <option value="assets/bear.png">Beer</option>
+            <option value="assets/bee.png">Bij</option>
+            <option value="assets/deer.png">Hert</option>
+            <option value="assets/panda.png">Panda</option>
             <option value="assets/r2.png">R2-D2</option>
+            <option value="assets/owl.png">Uil</option>
+            <option value="assets/fox.png">Vos</option>
+            <option value="assets/badger.png">Wasbeer</option>
+            <option value="assets/wolf.png">Wolf</option>
+            <option value="assets/yoda.png">Yoda</option>
           </select>
-            <a class="cardText button" id="createNewStudentBtn">Maak aan</a>
+        </div>
+        <div class="newStudentDiv">
+          <div class="dashboardCard" id="createNewStudentBtn">
+            <a class="cardText">Maak aan</a>
+          </div>
         </div>
 
+
         <!-- Dit kaartje is om een klas te laten zien -->
-        <div class="studentCardDiv" id="hideStudentsCard">
+        <div class="studentCardDiv" id="allStudentsButtons">
           <!-- Hier komt de data binnen uit de database -->
           <div class="dashboardCard backBtn">
             <a class="cardText">Ga terug...</a>
@@ -117,6 +135,10 @@
             <a class="cardText">Nieuwe leerling</a>
           </div>
         </div>
+
+        <div class="studentCardDiv" id="allStudents">
+        </div>
+
 
         <!-- Dit kaartje is om klassen in te laten zien -->
         <div class="classCardDiv" id="hideClassesCard">
@@ -145,11 +167,14 @@
           <div class="dashboardCard backBtn">
             <a class="cardText">Ga terug...</a>
           </div>
-          
-          <!-- Hier komt de data binnen uit de database -->
-
         </div>
 
+          <div class="singleStudentDiv" id="studentData">
+              <!-- Hier komt de data binnen uit de database -->
+          </div>
+
+          <div class="singleStudentDiv" id="studentButtons">
+          </div>
 
         <!-- Pagina loader, deze fade uit als de data uit de database binnen is -->
         <img class="loader" src="assets/loader.svg" alt="Laden..">
@@ -159,7 +184,8 @@
 
     <footer>
       <div class="footer">
-        <a class="text" >Gemaakt door P*ssy Squad</a>
+        <a class="footerText" >Gemaakt door P*ssy Squad</a>
+        <img class="footerLogo" src="assets/pussy.png" />
       </div>
     </footer>
   </div>

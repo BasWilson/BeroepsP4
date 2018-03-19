@@ -43,7 +43,7 @@ $('#closePopupBtn').click(function () {
 
 $('.backBtn').click(function () {
   hideAllViews();
-  $('.dashboardCardDiv').show(200);
+  showDashboard();
 });
 $('#profileBtn').click(function () {
   hideAllViews();

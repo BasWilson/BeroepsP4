@@ -55,8 +55,8 @@ io.on('connection', function(socket){
   /*
    * De leraar geeft een punt aan een student uit zijn/haar klas
   */
-  socket.on('setStudentPoints', function(data){
-    students.setStudentPointsInDB(data);
+  socket.on('editPoints', function(data){
+    fb.editPointsInDB(data, socket);
   });
 
   /*

@@ -49,7 +49,9 @@ function loadProfile() {
     photoUrl: user.photoUrl,
     uid: user.uid,
     className: 0,
-    student: 0
+    student: 0,
+    id: -1,
+    addingPoints: false
   };
 
   $('#teacherNameSide').html('<strong>'+data.name+'</strong>');
@@ -205,7 +207,7 @@ function getStudents (allStudents) {
                 var rightSideHTML = '<div class="rightSide">'+firstNamesHTML+lastNamesHTML+'</div>';
                 var studentCardHTML = '<div class="studentCard" onclick="openEditStudent(this.id)" id="'+i+'">'+leftSideHTML+rightSideHTML+pointsHTML+'</div>';
 
-                $('.studentCardDiv').append(studentCardHTML);
+                $('#allStudents').append(studentCardHTML);
 
               }
 
@@ -265,10 +267,17 @@ function openEditStudent(id) {
   $('#description').html('Bekijk hier de gegevens van <strong>'+dbFNames[id] + ' ' +dbLNames[id]+'</strong>');
   hideAllViewsWithoutClearingCache();
 
-  var nameHTML = '<p class="cardText marginBottom"><strong>'+dbFNames[id] + ' ' +dbLNames[id]+'</strong></p>';
+  var nameHTML = '<p class="cardText marginBottom textBig"><strong>'+dbFNames[id] + ' ' +dbLNames[id]+'</strong></p>';
+  var pointsHTML = '<p class="cardText marginBottom textBig" id="points'+id+'">Punten: <strong>'+dbPoints[id] +'</strong></p>';
   var avatarHTML = '<img class="studentAvatarBig" src="'+dbAvatars[id]+'"/>';
-  var singleStudentDivHTML = '<div class="singleStudentCard">'+nameHTML+avatarHTML+'</div>';
-  $('.singleStudentDiv').append(singleStudentDivHTML);
+  var plusBtnHTML = '<div class="dashboardCard singleStudentCard" onclick="addPoint(this.id)" id="'+id+'"><a class="cardText">Geef punt</a></div>';
+  var minusBtnHTML = '<div class="dashboardCard singleStudentCard" onclick="removePoint(this.id)" id="'+id+'"><a class="cardText">Neem punt</a></div>';
+
+
+
+  var singleStudentDivHTML = '<div class="singleStudentCard">'+nameHTML+avatarHTML+pointsHTML+'</div>';
+  $('#studentData').append(singleStudentDivHTML);
+  $('#studentButtons').append(plusBtnHTML+minusBtnHTML);
 
   $('.singleStudentDiv').css('display', 'flex');
   $('.singleStudentDiv').show(400);
@@ -283,6 +292,19 @@ function openNewClass() {
   $('.newClassDiv').show(400);
 }
 
+function addPoint(id) {
+
+  data.id = id;
+  data.addingPoints = true;
+  socketEditPoint(data);
+}
+
+function removePoint(id) {
+
+  data.id = id;
+  data.addingPoints = false;
+  socketEditPoint(data);
+}
 function openNewStudent() {
 
   clearArrays();

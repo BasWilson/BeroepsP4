@@ -74,10 +74,11 @@ ul {
 .centerContainer {
   width: 60%;
   height: 80%;
+  padding-bottom: 10%;
   margin: auto;
   text-align: center;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   position: relative;
 }
@@ -128,7 +129,7 @@ footer {
 }
 
 .footer {
-  width: 30%;
+  width: auto;
   background-color: white;
   position: fixed;
   bottom: 20px;
@@ -136,8 +137,22 @@ footer {
   padding: 10px;
   text-align: center;
   justify-content: center;
+  display: flex;
+  flex-direction: row;
 }
 
+.footerLogo {
+  width: 40px;
+  height: 40px;
+  margin: auto;
+  margin-left: 5px;
+}
+
+.footerText {
+  margin: auto;
+  font-size: 18px;
+  margin-right: 5px;
+}
 .socialIcon {
   width: 10%;
   height: auto;
@@ -165,6 +180,7 @@ footer {
   border-radius: 10px;
   display: flex;
   flex-wrap: wrap;
+  margin: auto;
 }
 
 .classCardDiv {
@@ -173,6 +189,7 @@ footer {
   border-radius: 10px;
   display: flex;
   flex-wrap: wrap;
+  margin: auto;
 }
 
 .singleStudentDiv {
@@ -181,7 +198,7 @@ footer {
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  margin: 20px;
+  margin: auto;
   display: none;
 }
 
@@ -191,7 +208,7 @@ footer {
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  margin: 20px;
+  margin: auto;
 }
 
 .profileCardDivSide {
@@ -212,6 +229,7 @@ footer {
   border-radius: 10px;
   display: flex;
   flex-direction: row;
+  margin: auto;
 }
 
 .extraCardDiv {
@@ -221,6 +239,7 @@ footer {
   display: flex;
   flex-direction: row;
   display: none;
+  margin: auto;
 }
 
 .newClassDiv {
@@ -230,6 +249,7 @@ footer {
   display: flex;
   flex-direction: row;
   display: none;
+  margin: auto;
 }
 
 .newStudentDiv {
@@ -237,8 +257,9 @@ footer {
   background-color: white;
   border-radius: 10px;
   display: flex;
-  flex-direction: row;
+  flex-direction:column;
   display: none;
+  margin: auto;
 }
 
 .popupDiv {
@@ -249,6 +270,7 @@ footer {
   flex-direction: row;
   display: none;
   z-index: 9999;
+  margin: auto;
 }
 
 .profileCardImage {
@@ -257,8 +279,9 @@ footer {
   border-radius: 100px;
 }
 
-#hideStudentsCard {
+.studentCardDiv {
   display: none;
+  margin: 20px;
 }
 
 #hideProfileCard {
@@ -325,6 +348,7 @@ footer {
   position: fixed;
   top: 20px;
   right: 20px;
+  margin: 0px;
   background-color: white;
 }
 
@@ -434,4 +458,8 @@ footer {
 .dashboardCard:hover {
   cursor: pointer;
   transform: scale(1.05);
+}
+
+.textBig {
+  font-size: 25px;
 }

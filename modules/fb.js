@@ -96,25 +96,47 @@ module.exports = {
         });
   },
 
-  createNewAccount: function (data) {
+  editPointsInDB: function (data, socket) {
 
-    var dbTitles = ["Voorbeeld kaartje"], dbReasons = ["Als je er voor kiest er een reden bij te zetten dan komt die hier"], dbTime = ["No limit"];
+    var dbPoints = [];
+    var newAmountOfPoints;
 
-    var cardsRef = db.collection('users').doc(data.uid);
+    var titleRef = db.collection('classes').doc(data.className);
+    var getDoc = titleRef.get()
+        .then(doc => {
+            if (!doc.exists) {
+                console.log('Student bestaat niet');
+            } else {
 
-    //Create the default intro card
-    var setCardData = cardsRef.set({
-      titles: dbTitles,
-      redenen: dbReasons,
-      dateTime: dbTime
-    }, { merge: true });
+                dbPoints = doc.data().points;
+                studentPoints = parseInt(dbPoints[data.id]);
 
-    //Create usefull user information
-    var setUserData = cardsRef.set({
-      balance: 0,
-      subscription: 0
-    }, { merge: true });
+                //kijken of we punten toevoegen of weghalen
+                if (data.addingPoints == false) {
+                  if (studentPoints <= 0) {
+                    //mag niet onder 0 komen
+                  } else {
+                    newAmountOfPoints = studentPoints - 1;
+                  }
+                } else {
+                  if (studentPoints >= 1000) {
+                    //mag niet over 1000
+                  } else {
+                    newAmountOfPoints = studentPoints + 1;
+                  }
+                }
+                  data.newPoints = parseInt(newAmountOfPoints);
+                  dbPoints[data.id] = newAmountOfPoints;
 
+                  var setWithOptions = titleRef.set({
+                    points: dbPoints
+                  }, { merge: true });
+                  socket.emit('pointsChanged', data);
+            }
+        })
+        .catch(err => {
+            console.log('Fout tijdens het ophalen van student: ', err);
+        });
   },
 
   addClassToDB: function (name, socket) {
