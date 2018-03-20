@@ -2,7 +2,7 @@ module.exports = {
 
   addStudentToDB: function (studentData, socket) {
 
-    var dbFNames = [], dbLNames = [], dbPoints = [], dbAvatars = [], dbClass = [];
+    var dbFNames = [], dbLNames = [], dbPoints = [], dbAvatars = [], dbClass = [],  negativePoints = [];
 
     var titleRef = db.collection('classes').doc(studentData.class);
     var getDoc = titleRef.get()
@@ -11,18 +11,13 @@ module.exports = {
                 console.log('Klas bestaat niet');
             } else {
 
-
                 dbFNames = doc.data().firstnames;
                 dbLNames = doc.data().lastnames;
                 dbPoints = doc.data().points;
+                dbNegativePoints = doc.data().negativePoints;
                 dbAvatars = doc.data().avatars;
                 dbClass = doc.data().class;
 
-                console.log(dbFNames);
-                console.log(dbLNames);
-                console.log(dbPoints);
-                console.log(dbAvatars);
-                console.log(dbClass);
                 studentPoints = parseInt(studentData.points);
 
                 dbFNames.push(studentData.firstname);
@@ -42,6 +37,7 @@ module.exports = {
                   avatars: dbAvatars,
                   points: dbPoints,
                   class: dbClass,
+                  negativePoints: dbNegativePoints,
                   totalAmount: newAmountOfStudents
                 }, { merge: true });
                 socket.emit('studentCreated', studentData.firstname);
@@ -66,7 +62,6 @@ module.exports = {
                 dbReasons = doc.data().redenen;
                 dbTime = doc.data().dateTime;
 
-                console.log(data.cardNumber);
                 //reverse the arrays to be in line with fb
                 dbTitles.reverse();
                 dbReasons.reverse();
@@ -98,8 +93,9 @@ module.exports = {
 
   editPointsInDB: function (data, socket) {
 
-    var dbPoints = [];
-    var newAmountOfPoints;
+    var dbPoints = [], dbNegativePoints = [];
+    var newAmountOfPoints = 0;
+    var newAmountOfNegativePoints = 0;
 
     var titleRef = db.collection('classes').doc(data.className);
     var getDoc = titleRef.get()
@@ -109,29 +105,31 @@ module.exports = {
             } else {
 
                 dbPoints = doc.data().points;
-                studentPoints = parseInt(dbPoints[data.id]);
+                dbNegativePoints = doc.data().negativePoints;
 
+                studentPoints = parseInt(dbPoints[data.id]);
+                studentNegativePoints = parseInt(dbNegativePoints[data.id]);
                 //kijken of we punten toevoegen of weghalen
                 if (data.addingPoints == false) {
-                  if (studentPoints <= 0) {
-                    //mag niet onder 0 komen
-                  } else {
-                    newAmountOfPoints = studentPoints - 1;
-                  }
+                  newAmountOfNegativePoints = studentNegativePoints + 1;
+                  data.newNegativePoints = parseInt(newAmountOfNegativePoints);
+                  dbNegativePoints[data.id] = newAmountOfNegativePoints;
+                  var setWithOptions = titleRef.set({
+                    negativePoints: dbNegativePoints
+                  }, { merge: true });
+                  socket.emit('pointsChanged', data);
                 } else {
-                  if (studentPoints >= 1000) {
-                    //mag niet over 1000
-                  } else {
-                    newAmountOfPoints = studentPoints + 1;
-                  }
-                }
+                  newAmountOfPoints = studentPoints + 1;
                   data.newPoints = parseInt(newAmountOfPoints);
                   dbPoints[data.id] = newAmountOfPoints;
-
                   var setWithOptions = titleRef.set({
                     points: dbPoints
                   }, { merge: true });
                   socket.emit('pointsChanged', data);
+                }
+
+
+
             }
         })
         .catch(err => {

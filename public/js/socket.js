@@ -16,17 +16,18 @@ socket.on('studentCreated', function (name) {
 });
 
 socket.on('pointsChanged', function (data) {
-  $('#points'+data.id).html("Punten: <strong>"+ data.newPoints+"</strong>");
 
   if (data.addingPoints == true) {
+    $('#points'+data.id).html("Positiviteit: <strong>"+ data.newPoints+"</strong>");
     $('#points'+data.id).css('color', 'green');
     setTimeout(function() {
       $('#points'+data.id).css('color', 'black');
     },2000);
   } else {
-    $('#points'+data.id).css('color', 'red');
+    $('#negativePoints'+data.id).html("Negativiteit: <strong>"+ data.newNegativePoints+"</strong>");
+    $('#negativePoints'+data.id).css('color', 'red');
     setTimeout(function() {
-      $('#points'+data.id).css('color', 'black');
+      $('#negativePoints'+data.id).css('color', 'black');
     },2000);  }
 
 });

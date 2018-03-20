@@ -4,7 +4,7 @@
 var currentView;
 var data;
 var user;
-var dbFNames = [], dbLNames = [], dbPoints = [], dbAvatars = [];
+var dbFNames = [], dbLNames = [], dbPoints = [], dbAvatars = [], dbNegativePoints = [];
 var totalStudents, totalPoints;
 
 $( document ).ready(function() {
@@ -176,6 +176,7 @@ function getStudents (allStudents) {
               dbFNames = doc.data().firstnames;
               dbLNames = doc.data().lastnames;
               dbPoints = doc.data().points;
+              dbNegativePoints = doc.data().negativePoints;
               dbAvatars = doc.data().avatars;
 
               //Het overzicht schermpje instellen
@@ -224,7 +225,7 @@ function getStudents (allStudents) {
 }
 
 function clearArrays () {
-  dbFNames = [], dbLNames = [], dbPoints = [], dbAvatars = [];
+  dbFNames = [], dbLNames = [], dbPoints = [], dbAvatars = [], dbNegativePoints = [];
 }
 
 function clearCards() {
@@ -268,14 +269,15 @@ function openEditStudent(id) {
   hideAllViewsWithoutClearingCache();
 
   var nameHTML = '<p class="cardText marginBottom textBig"><strong>'+dbFNames[id] + ' ' +dbLNames[id]+'</strong></p>';
-  var pointsHTML = '<p class="cardText marginBottom textBig" id="points'+id+'">Punten: <strong>'+dbPoints[id] +'</strong></p>';
+  var pointsHTML = '<p class="cardText marginBottom textBig" id="points'+id+'">Positiviteit: <strong>'+dbPoints[id] +'</strong></p>';
+  var negativePointsHTML = '<p class="cardText marginBottom textBig" id="negativePoints'+id+'">Negativiteit: <strong>'+dbNegativePoints[id] +'</strong></p>';
   var avatarHTML = '<img class="studentAvatarBig" src="'+dbAvatars[id]+'"/>';
-  var plusBtnHTML = '<div class="dashboardCard singleStudentCard" onclick="addPoint(this.id)" id="'+id+'"><a class="cardText">Geef punt</a></div>';
-  var minusBtnHTML = '<div class="dashboardCard singleStudentCard" onclick="removePoint(this.id)" id="'+id+'"><a class="cardText">Neem punt</a></div>';
+  var plusBtnHTML = '<div class="dashboardCard singleStudentCard" onclick="addPoint(this.id)" id="'+id+'"><a class="cardText">Geef positief punt</a></div>';
+  var minusBtnHTML = '<div class="dashboardCard singleStudentCard" onclick="negativePoint(this.id)" id="'+id+'"><a class="cardText">Geef negatief punt</a></div>';
 
 
 
-  var singleStudentDivHTML = '<div class="singleStudentCard">'+nameHTML+avatarHTML+pointsHTML+'</div>';
+  var singleStudentDivHTML = '<div class="singleStudentCard">'+nameHTML+avatarHTML+pointsHTML+negativePointsHTML+'</div>';
   $('#studentData').append(singleStudentDivHTML);
   $('#studentButtons').append(plusBtnHTML+minusBtnHTML);
 
@@ -299,7 +301,7 @@ function addPoint(id) {
   socketEditPoint(data);
 }
 
-function removePoint(id) {
+function negativePoint(id) {
 
   data.id = id;
   data.addingPoints = false;
@@ -366,13 +368,14 @@ function createNewStudent(studentData) {
   studentData = {
     firstname: $('#firstNameField').val(),
     lastname: $('#lastNameField').val(),
-    points: $('#pointsField').val(),
     avatar: $('#avatarSelect').val(),
-    class: $('#classSelect').val()
+    class: $('#classSelect').val(),
+    points: 0,
+    negativePoints: 0
   };
 
   console.log('ho');
-  if (studentData.firstname == "" || studentData.lastname == "" || studentData.points == "" || studentData.points == NaN) {
+  if (studentData.firstname == "" || studentData.lastname == "" ) {
     alert("Vul alle velden in");
   } else {
     $('.loader').show(100);
