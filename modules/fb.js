@@ -2,7 +2,7 @@ module.exports = {
 
   addStudentToDB: function (studentData, socket) {
 
-    var dbFNames = [], dbLNames = [], dbPoints = [], dbAvatars = [], dbClass = [],  negativePoints = [];
+    var dbFNames = [], dbLNames = [], dbPoints = [], dbAvatars = [], dbClass = [],  dbNegativePoints = [];
 
     var titleRef = db.collection('classes').doc(studentData.class);
     var getDoc = titleRef.get()
@@ -19,9 +19,12 @@ module.exports = {
                 dbClass = doc.data().class;
 
                 studentPoints = parseInt(studentData.points);
+                studentNegativePoints = parseInt(studentData.negativePoints);
 
+                console.log(studentData);
                 dbFNames.push(studentData.firstname);
                 dbPoints.push(studentPoints);
+                dbNegativePoints.push(studentNegativePoints);
                 dbAvatars.push(studentData.avatar);
                 dbLNames.push(studentData.lastname);
                 dbClass.push(studentData.class);
