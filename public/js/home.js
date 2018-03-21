@@ -41,7 +41,7 @@ $('#closePopupBtn').click(function () {
   closePopup();
 });
 
-$('.backBtn').click(function () {
+$('#backBtn').click(function () {
   hideAllViews();
   showDashboard();
 });

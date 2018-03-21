@@ -142,15 +142,15 @@ footer {
 }
 
 .footerLogo {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   margin: auto;
   margin-left: 5px;
 }
 
 .footerText {
   margin: auto;
-  font-size: 18px;
+  font-size: 12px;
   margin-right: 5px;
 }
 .socialIcon {
@@ -190,6 +190,7 @@ footer {
   display: flex;
   flex-wrap: wrap;
   margin: auto;
+  display: none;
 }
 
 .singleStudentDiv {
@@ -209,6 +210,7 @@ footer {
   display: flex;
   flex-direction: column;
   margin: auto;
+  display: none;
 }
 
 .profileCardDivSide {
@@ -230,6 +232,7 @@ footer {
   display: flex;
   flex-direction: row;
   margin: auto;
+  width: auto;
 }
 
 .extraCardDiv {

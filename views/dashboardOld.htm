@@ -19,23 +19,6 @@
 <body>
 
   <div class="wrapper">
-    <nav>
-      <div class="navigationBar">
-
-          <a id="backBtn" class="navCard">Ga terug...</a>
-          <a id="classesBtn" class="navCard">Mijn klassen</a>
-          <a id="studentsBtn" class="navCard">Mijn leerlingen</a>
-          <a id="profileBtn" class="navCard">Mijn profiel</a>
-          <a id="extraBtn" class="navCard">Extra</a>
-          <a id="newClassBtn" class="navCard">Nieuwe klas</a>
-          <a id="createNewClassBtn" class="navCard">Maak aan</a>
-          <a id="createNewStudentBtn" class="navCard">Maak aan</a>
-          <a id="summaryBtn" class="navCard">Overzicht</a>
-          <a id="addStudentBtn" class="navCard">Nieuwe student</a>
-
-
-      </div>
-    </nav>
 
     <header>
       <div class="headerContainer">
@@ -45,14 +28,15 @@
       </div>
     </header>
 
-    <!-- Dit kaartje is om een profiel te laten zien-->
+    <!-- Dit kaartje is om een profiel in te laten zien-->
     <div class="profileCardDivSide">
+      <!-- Hier komt de data binnen uit de database -->
       <img class="profileCardImage" src="assets/profile.jpg"/>
       <p class="cardText marginTop" id="teacherNameSide"></p>
     </div>
 
     <!-- Log uit knop-->
-    <a class="button" id="logoutBtn">Log uit</a>
+      <a class="button" id="logoutBtn">Log uit</a>
 
     <section>
 
@@ -64,12 +48,52 @@
           <a class="cardText button" id="closePopupBtn">Sluit</a>
         </div>
 
+        <!-- Dit kaartje is om het dashboard te laten zien -->
+        <div class="dashboardCardDiv" id="hideDashboardCardDiv">
+          <div class="dashboardCard" id="classesBtn">
+            <a class="cardText">Mijn klassen</a>
+          </div>
+
+          <div class="dashboardCard" id="studentsBtn">
+            <a class="cardText">Mijn leerlingen</a>
+          </div>
+
+          <div class="dashboardCard" id="profileBtn">
+            <a class="cardText">Mijn profiel</a>
+          </div>
+
+          <div class="dashboardCard" id="extraBtn">
+            <a class="cardText">Extra</a>
+          </div>
+        </div>
+
+
+        <!-- Dit kaartje is om de extra opties te laten zien -->
+        <div class="extraCardDiv" id="hideExtraCardDiv">
+          <div class="dashboardCard backBtn">
+            <a class="cardText">Ga terug...</a>
+          </div>
+          <div class="dashboardCard" id="newClassBtn">
+            <a class="cardText">Nieuwe klas</a>
+          </div>
+
+        </div>
+
         <!-- Dit kaartje is om de nieuwe klassen aan te maken -->
-        <div class="newClassDiv">
+        <div class="newClassDiv" id="hideNewClassCardDiv">
+          <div class="dashboardCard backBtn">
+            <a class="cardText">Ga terug...</a>
+          </div>
             <input class="textfield" placeholder="Klas naam" id="classNameField" type="text"/>
+            <a class="cardText button" id="createNewClassBtn">Maak aan</a>
         </div>
 
         <!-- Dit kaartje is om de nieuwe studenten aan te maken -->
+        <div class="newStudentDiv">
+          <div class="dashboardCard backBtn">
+            <a class="cardText">Ga terug...</a>
+          </div>
+        </div>
         <div class="newStudentDiv">
           <input class="textfield" placeholder="Voornaam" id="firstNameField" type="text"/>
           <input class="textfield" placeholder="Achternaam" id="lastNameField" type="text"/>
@@ -90,19 +114,47 @@
             <option value="assets/yoda.png">Yoda</option>
           </select>
         </div>
+        <div class="newStudentDiv">
+          <div class="dashboardCard" id="createNewStudentBtn">
+            <a class="cardText">Maak aan</a>
+          </div>
+        </div>
+
 
         <!-- Dit kaartje is om een klas te laten zien -->
-        <div class="studentCardDiv" id="allStudents">
+        <div class="studentCardDiv" id="allStudentsButtons">
           <!-- Hier komt de data binnen uit de database -->
+          <div class="dashboardCard backBtn">
+            <a class="cardText">Ga terug...</a>
+          </div>
+          <div class="dashboardCard" id="summaryBtn">
+            <a class="cardText">Overzicht</a>
+          </div>
+          <div class="dashboardCard" id="addStudentBtn">
+            <a class="cardText">Nieuwe leerling</a>
+          </div>
+        </div>
+
+        <div class="studentCardDiv" id="allStudents">
         </div>
 
 
         <!-- Dit kaartje is om klassen in te laten zien -->
-        <div class="classCardDiv">
+        <div class="classCardDiv" id="hideClassesCard">
           <!-- Hier komt de data binnen uit de database -->
+          <div class="dashboardCard backBtn">
+            <a class="cardText">Ga terug...</a>
+          </div>
         </div>
 
-        <div class="profileCardDiv" >
+        <!-- Dit kaartje is om een profiel in te laten zien-->
+        <div class="profileCardDiv" id="hideProfileCard">
+          <div class="dashboardCard backBtn">
+            <a class="cardText">Ga terug...</a>
+          </div>
+        </div>
+
+        <div class="profileCardDiv" id="hideProfileCard">
           <!-- Hier komt de data binnen uit de database -->
           <p class="cardText marginBottom">U bent ingelogd als</p>
           <img class="profileCardImage" src="assets/profile.jpg"/>
@@ -110,8 +162,17 @@
         </div>
 
         <!-- Dit kaartje is om een leerling in te laten zien-->
+        <div class="singleStudentDiv">
+          <div class="dashboardCard backBtn">
+            <a class="cardText">Ga terug...</a>
+          </div>
+        </div>
+
           <div class="singleStudentDiv" id="studentData">
               <!-- Hier komt de data binnen uit de database -->
+          </div>
+
+          <div class="singleStudentDiv" id="studentButtons">
           </div>
 
         <!-- Pagina loader, deze fade uit als de data uit de database binnen is -->
@@ -127,6 +188,25 @@
       </div>
     </footer>
 
+    <nav>
+      <div class="navigationBar">
+        <div class="dashboardCard" id="classesBtn">
+          <a class="cardText">Mijn klassen</a>
+        </div>
+
+        <div class="dashboardCard" id="studentsBtn">
+          <a class="cardText">Mijn leerlingen</a>
+        </div>
+
+        <div class="dashboardCard" id="profileBtn">
+          <a class="cardText">Mijn profiel</a>
+        </div>
+
+        <div class="dashboardCard" id="extraBtn">
+          <a class="cardText">Extra</a>
+        </div>
+      </div>
+    </nav>
   </div>
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
@@ -134,7 +214,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
   <script src="js/home.js"></script>
   <script src="js/fb.js"></script>
-  <script src="js/nav.js"></script>
   <script src="js/students.js"></script>
   <script src="js/socket.js"></script>
 </body>

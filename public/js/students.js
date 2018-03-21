@@ -14,7 +14,7 @@ $( document ).ready(function() {
     checkIfSignedIn();
   },600)
 
-
+  switchPage('dashboard');
   /*
   * Handle clicks
   */
@@ -94,9 +94,11 @@ function hideAllViewsWithoutClearingCache() {
   $('.singleStudentCard').remove('.singleStudentCard');
 
 }
+
 function showProfile() {
 
   loadProfile();
+  switchPage('profile');
 
   $('.loader').hide(100);
   $('#teacherName').html('<strong>'+data.name+'</strong>');
@@ -108,6 +110,9 @@ function showProfile() {
 }
 
 function showDashboard() {
+
+  switchPage('dashboard');
+
   $('.headerText').text('Dashboard');
   $('#description').text('Wat wilt u doen?');
   $('.dashboardCardDiv').show(200);
@@ -115,6 +120,8 @@ function showDashboard() {
 }
 
 function loadClasses() {
+
+  switchPage('classes');
 
   $('.loader').show(100);
   $('.headerText').text('Uw klassen');
@@ -128,8 +135,6 @@ function loadClasses() {
           } else {
 
               dbClass = doc.data().classes;
-
-              console.log(dbClass);
 
               //Eerst de oude kaartjes verwijderen voordat we ze opnieuw laden
               $('.classCard').remove('.classCard');
@@ -158,6 +163,7 @@ function loadClasses() {
 
 function getStudents (allStudents) {
 
+  switchPage('students');
 
   $('.loader').show(100);
   $('.headerText').html('Leerlingen uit klas <strong>'+data.className+'</strong>');
@@ -189,11 +195,6 @@ function getStudents (allStudents) {
                 $('.loader').hide(0);
               }
 
-              console.log(dbFNames);
-              console.log(dbLNames);
-              console.log(dbPoints);
-              console.log(dbAvatars);
-
 
               for (var i = 0; i < dbFNames.length; i++) {
 
@@ -218,8 +219,7 @@ function getStudents (allStudents) {
               $('.studentCard').css('marginBottom', '10px');
               $('.studentCard').css('marginTop', '10px');
               $('.studentCardDiv').show(400);
-              console.log(totalPoints);
-              console.log(totalStudents);
+
           }
 })
 }
@@ -232,12 +232,15 @@ function clearCards() {
   $('.classCard').remove('.classCard');
   $('.studentCard').remove('.studentCard');
   $('.addStudentBtn').remove('.addStudentBtn');
+  $('.negativePoint').remove('.negativePoint');
+  $('.positivePoint').remove('.positivePoint');
 }
 
 function getAllStudents () {
 
     clearArrays();
     clearCards();
+    switchPage('allStudents');
 
     var classesRef = db.collection('teachers').doc(data.uid);
     var getDoc = classesRef.get()
@@ -255,7 +258,6 @@ function getAllStudents () {
                   data.className = dbClass[i];
                   allStudents = true;
                   getStudents(allStudents);
-                  console.log(data.className);
                 }
             }
   })
@@ -263,6 +265,8 @@ function getAllStudents () {
 }
 
 function openEditStudent(id) {
+
+  switchPage('editStudents');
 
   $('.headerText').html();
   $('#description').html('Bekijk hier de gegevens van <strong>'+dbFNames[id] + ' ' +dbLNames[id]+'</strong>');
@@ -272,20 +276,22 @@ function openEditStudent(id) {
   var pointsHTML = '<p class="cardText marginBottom textBig" id="points'+id+'">Positiviteit: <strong>'+dbPoints[id] +'</strong></p>';
   var negativePointsHTML = '<p class="cardText marginBottom textBig" id="negativePoints'+id+'">Negativiteit: <strong>'+dbNegativePoints[id] +'</strong></p>';
   var avatarHTML = '<img class="studentAvatarBig" src="'+dbAvatars[id]+'"/>';
-  var plusBtnHTML = '<div class="dashboardCard singleStudentCard" onclick="addPoint(this.id)" id="'+id+'"><a class="cardText">Geef positief punt</a></div>';
-  var minusBtnHTML = '<div class="dashboardCard singleStudentCard" onclick="negativePoint(this.id)" id="'+id+'"><a class="cardText">Geef negatief punt</a></div>';
-
-
+  var plusBtnHTML = '<a class="navCard positivePoint" onclick="addPoint(this.id)" id="'+id+'">Geef positief punt</a>';
+  var minusBtnHTML = '<a class="navCard negativePoint" onclick="negativePoint(this.id)" id="'+id+'">Geef negatief punt</a>';
 
   var singleStudentDivHTML = '<div class="singleStudentCard">'+nameHTML+avatarHTML+pointsHTML+negativePointsHTML+'</div>';
   $('#studentData').append(singleStudentDivHTML);
-  $('#studentButtons').append(plusBtnHTML+minusBtnHTML);
+  $('.navigationBar').append(plusBtnHTML+minusBtnHTML);
 
+  $('.positivePoint').show();
+  $('.negativePoint').show();
   $('.singleStudentDiv').css('display', 'flex');
   $('.singleStudentDiv').show(400);
 }
 
 function openNewClass() {
+
+  switchPage('newClass');
 
   $('.headerText').html('Nieuwe klas');
   $('#description').text('Maak hier een nieuwe klas aan');
@@ -310,6 +316,7 @@ function negativePoint(id) {
 function openNewStudent() {
 
   clearArrays();
+  switchPage('newStudent');
 
     var classesRef = db.collection('teachers').doc(data.uid);
     var getDoc = classesRef.get()
@@ -341,6 +348,9 @@ function openNewStudent() {
 }
 
 function openExtra() {
+
+  switchPage('extra');
+
   $('.headerText').html('Extra');
   $('#description').text('Extra opties voor het beoordelings systeem');
 
@@ -374,7 +384,6 @@ function createNewStudent(studentData) {
     negativePoints: 0
   };
 
-  console.log('ho');
   if (studentData.firstname == "" || studentData.lastname == "" ) {
     alert("Vul alle velden in");
   } else {

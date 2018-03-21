@@ -1,81 +1,83 @@
-var isOpen = false;
-var width , height;
+function switchPage(nextPage) {
 
-$(".menuButton").click(function(){
+  //The navigation buttons
+  var btn1, btn2, bt3, bt4;
+  $('#backBtn').hide(0);
 
-  toggleMenu();
+  //dashbaord
+  $('#classesBtn').hide(0);
+  $('#studentsBtn').hide(0);
+  $('#profileBtn').hide(0);
+  $('#extraBtn').hide(0);
 
-});
+  //extra menu
+  $('#newClassBtn').hide(0);
 
-$(".centerContainer").click(function(){
+  //new class btn
+  $('#createNewClassBtn').hide(0);
 
-  if (isOpen == true) {
-    toggleMenu();
-  }
+  //create new student view
+  $('#createNewStudentBtn').hide(0);
 
-});
-function toggleMenu() {
-  var windowWidth = $( window ).width();
-  var margin = 20;
-  var mobileWidth = "15%";
-  var mobileHeight = "50%";
+  //All students menu
+  $('#summaryBtn').hide(0);
+  $('#addStudentBtn').hide(0);
 
-  if (windowWidth < 600) {
-    if (isOpen == false) {
-      margin = "0px 0px 20% 0px";
-    } else {
-      margin = 0;
-    }
-    mobileWidth = "200px";
-    mobileHeight = "78%";
-  } else {
-    margin = "20px 20px 20px 30px";
-  }
+  //Edit student view
+  $('#positivePointBtn').hide(0);
+  $('#negativePointBtn').hide(0);
 
-  if (isOpen == true) {
-    isOpen = !isOpen;
+  switch (nextPage) {
+    case 'profile':
+      $('#backBtn').show(100);
+      break;
+      case 'dashboard':
+      $('#classesBtn').show(100);
+      $('#studentsBtn').show(100);
+      $('#profileBtn').show(100);
+      $('#extraBtn').show(100)
+        break;
+        case 'classes':
+        $('#backBtn').show(100);
 
-    $('.menuButton').fadeOut('fast', function () {
-        $('.menuButton').attr('src', 'assets/menublack.png');
-        $('.menuButton').fadeIn('fast');
-        $('.navigationMenu').fadeOut('fast');
+          break;
+          case 'students':
+          $('#backBtn').show(100);
+          $('#summaryBtn').show(100);
+          $('#addStudentBtn').show(100);
+            break;
+            case 'allStudents':
+            $('#backBtn').show(100);
+            $('#summaryBtn').show(100);
+            $('#addStudentBtn').show(100);
+              break;
+              case 'editStudents':
+              $('#backBtn').show(100);
+              $('#positivePointBtn').show(100);
+              $('#negativePointBtn').show(100);
+                break;
+                case 'newClass':
+                $('#backBtn').show(100);
+                $('#createNewClassBtn').show(100);
 
-    });
+                  break;
+                  case 'newStudent':
+                  $('#backBtn').show(100);
+                  $('#createNewStudentBtn').show(100);
 
+                    break;
+                    case 'extra':
+                    $('#backBtn').show(100);
+                    $('#newClassBtn').show(100);
 
-    $(".navButton").animate({
-        height: height,
-        width: width,
-        margin: margin
-    }, (200));
-
-    setTimeout(function () {
-      $( ".navButton" ).addClass( "hover" );
-      $( ".menuButton" ).removeClass( "hover" );
-
-    }, 250)
-
-  } else {
-    isOpen = !isOpen;
-    $( ".navButton" ).removeClass( "hover" );
-    $( ".menuButton" ).addClass( "hover" );
-
-    width = $( '.navButton' ).css( "width" );
-    height = $( '.navButton' ).css( "height" );
-
-    $('.menuButton').fadeOut('fast', function () {
-        $('.menuButton').attr('src', 'assets/closeblack.png');
-        $('.menuButton').fadeIn('fast');
-        $('.navigationMenu').fadeIn('fast');
-    });
-    console.log(mobileHeight);
-    console.log(mobileWidth);
-
-    $(".navButton").animate({
-        height: mobileHeight,
-        width: mobileWidth,
-        margin: margin
-      }, (200));
+                      break;
+    default:
 
   }
+
 }
+
+$( document ).ready(function() {
+
+
+});
