@@ -6,7 +6,7 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 20%;
-  font-size: 40px;
+  font-size: 25px;
 }
 
 .headerContainer {
@@ -42,4 +42,9 @@
 
 .centerContainer {
   margin-bottom: 20%;
+}
+
+.splashscreenDiv {
+  width: 100%;
+  margin: auto;
 }
