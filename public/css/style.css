@@ -301,6 +301,29 @@ footer {
   margin: auto;
   display: none;
 }
+
+.pageLoader {
+  text-align: center;
+  width: 120px;
+  transition: all 0.4s ease;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25%;
+}
+
+.loaderText {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20%;
+  font-size: 40px;
+}
+.splashscreenDiv {
+  width: 40%;
+  height: auto;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
 .studentCard {
   padding: 10px;
   background-color: rgb(246, 229, 255);

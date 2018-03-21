@@ -35,6 +35,13 @@ function checkIfSignedIn() {
   if (user) {
     // Leraar is ingelogd
     loadProfile(user);
+
+    setTimeout(function () {
+      $('.splashscreenDiv').fadeOut(200);
+      $('.wrapper').fadeIn(800);
+    },1000)
+
+
   } else {
     // Er is niemand ingelogd
     window.location.href = "/login";

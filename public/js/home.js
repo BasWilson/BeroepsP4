@@ -5,8 +5,6 @@ console.log(n);
 
 $( document ).ready(function() {
   welkomsBericht();
-  $('.wrapper').fadeIn(500);
-
 });
 
 function welkomsBericht() {

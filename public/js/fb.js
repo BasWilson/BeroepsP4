@@ -20,6 +20,8 @@ $( document ).ready(function() {
   });
 });
 function login(user, pass) {
+  $('.wrapper').fadeOut(300);
+
   user = $('#userField').val();
   pass = $('#passwordField').val();
   user = user + "@glr.nl";
@@ -31,6 +33,7 @@ function login(user, pass) {
       var errorCode = error.code;
       var errorMessage = error.message;
 
+      $('.wrapper').fadeIn(300);
       if (errorCode === 'auth/wrong-password') {
           alert('Wrong password.');
       } else {
