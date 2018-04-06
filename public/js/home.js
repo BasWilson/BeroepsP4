@@ -86,3 +86,19 @@ $('#createNewStudentBtn').click(function () {
   hideAllViews();
   createNewStudent();
 });
+
+$('#summaryBtn').click(function () {
+  hideAllViews();
+  showSummary();
+});
+
+$('#supportBtn').click(function () {
+  hideAllViews();
+  showSupport();
+});
+
+$('#submitBtn').click(function () {
+  createTicket();
+  hideAllViews();
+  showDashboard();
+});

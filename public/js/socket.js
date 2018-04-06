@@ -50,3 +50,7 @@ function socketEditPoint(data) {
   socket.emit('editPoints', data);
 
 }
+
+function socketEmitTicket(ticketData) {
+  socket.emit('supportTicket', ticketData);
+}

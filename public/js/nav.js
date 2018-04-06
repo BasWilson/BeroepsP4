@@ -12,6 +12,8 @@ function switchPage(nextPage) {
 
   //extra menu
   $('#newClassBtn').hide(0);
+  $('#supportBtn').hide(0);
+  $('#submitBtn').hide(0);
 
   //new class btn
   $('#createNewClassBtn').hide(0);
@@ -61,14 +63,24 @@ function switchPage(nextPage) {
                 $('#createNewClassBtn').show(100);
 
                   break;
+                  case 'summary':
+                  $('#backBtn').show(100);
+
+                    break;
                   case 'newStudent':
                   $('#backBtn').show(100);
                   $('#createNewStudentBtn').show(100);
 
                     break;
+                    case 'support':
+                    $('#submitBtn').show(100);
+                    $('#backBtn').show(100);
+
+                      break;
                     case 'extra':
                     $('#backBtn').show(100);
                     $('#newClassBtn').show(100);
+                    $('#supportBtn').show(100);
 
                       break;
     default:

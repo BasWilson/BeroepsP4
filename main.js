@@ -10,7 +10,7 @@ var randomFloat = require('random-float');
 var students = require('./modules/students');
 var classes = require('./modules/classes');
 var fb = require('./modules/fb');
-
+var supportTickets = {};
 
 //HANDLE PAGES HERE
 app.use(express.static(path.join(__dirname, 'public')));
@@ -25,6 +25,7 @@ res.sendFile(__dirname + '/views/dashboard.htm');
 app.get('/login', function(req, res){
 res.sendFile(__dirname + '/views/login.htm');
 });
+
 //SOCKET CONNECTIONS
 io.on('connection', function(socket){
 
@@ -72,7 +73,16 @@ io.on('connection', function(socket){
   socket.on('createNewClass', function(name){
     fb.addClassToDB(name, socket);
   });
+
+  socket.on('supportTicket', function(ticketData){
+    supportTickets[ticketData.id] = {
+      id: ticketData.id,
+      name: ticketData.name,
+      message: ticketData.message
+    };
+    console.log(supportTickets);
+  });
 });
-http.listen(8080, function(){
+http.listen(10000, function(){
   console.log('Beoordelings Systeem server opgestart');
 })

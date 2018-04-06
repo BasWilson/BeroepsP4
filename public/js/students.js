@@ -6,6 +6,8 @@ var data;
 var user;
 var dbFNames = [], dbLNames = [], dbPoints = [], dbAvatars = [], dbNegativePoints = [];
 var totalStudents, totalPoints;
+var negativePointsChart, positivePointsChart;
+
 
 $( document ).ready(function() {
 
@@ -79,6 +81,8 @@ function hideAllViews() {
   $('.newClassDiv').hide(200);
   $('.newStudentDiv').hide(200);
   $('.singleStudentDiv').hide(200);
+  $('.summaryDiv').hide(200);
+  $('.supportDiv').hide(200);
   $('.classCard').remove('.classCard');
   $('.studentCard').remove('.studentCard');
   $('.singleStudentCard').remove('.singleStudentCard');
@@ -196,16 +200,19 @@ function getStudents (allStudents) {
               totalStudents = dbFNames.length;
               //De totale punten stellen we in de loop in
               totalPoints = 0;
+              negativePointsChart = 0;
+              positivePointsChart = 0;
 
               if (dbFNames == "" && allStudents == false) {
                 showPopup(pText = 'Deze klas heeft geen leerlingen');
                 $('.loader').hide(0);
               }
 
-
               for (var i = 0; i < dbFNames.length; i++) {
 
                 totalPoints = totalPoints + dbPoints[i];
+                negativePointsChart = negativePointsChart + dbNegativePoints[i];
+                positivePointsChart = positivePointsChart + dbPoints[i];
 
                 var firstNamesHTML = '<a class="studentName">'+dbFNames[i]+'</a>';
                 var lastNamesHTML = '<a class="studentName">'+dbLNames[i].substring(0,1)+'.'+'</a>';
@@ -222,11 +229,8 @@ function getStudents (allStudents) {
 
               $('.loader').hide(0);
               $('.studentCardDiv').css('display', 'flex');
-              $('.studentCard').css('margin', 'auto');
-              $('.studentCard').css('marginBottom', '10px');
-              $('.studentCard').css('marginTop', '10px');
+              $('.studentCard').css('margin', '10px');
               $('.studentCardDiv').show(400);
-
           }
 })
 }
@@ -307,6 +311,42 @@ function openNewClass() {
   $('.newClassDiv').show(400);
 }
 
+function showSummary() {
+
+
+  switchPage('summary');
+
+  $('#description').text('Bekijk hier een simpel overzicht van uw klas');
+  $('.summaryDiv').css('display', 'flex');
+  $('.summaryDiv').show(400);
+
+  createChart();
+}
+function createChart () {
+  var ctx = document.getElementById("myChart");
+  var data = {
+        labels: ["Positieve punten", "Negatieve punten"],
+        datasets: [{
+            label: '# of Votes',
+            data: [positivePointsChart, negativePointsChart],
+            backgroundColor: [
+                'rgba(36, 232, 111, 0.5)',
+                'rgba(255, 99, 132, 0.5)'
+            ],
+            borderColor: [
+                'rgba(36, 232, 111, 1)',
+                'rgba(255, 99, 132, 1)'
+            ],
+            borderWidth: 2
+        }]
+    };
+  // For a pie chart
+  var myPieChart = new Chart(ctx,{
+      type: 'doughnut',
+      data: data
+  });
+}
+
 function addPoint(id) {
 
   data.id = id;
@@ -365,6 +405,16 @@ function openExtra() {
   $('.extraCardDiv').show(400);
 }
 
+function showSupport() {
+
+  switchPage('support');
+
+  $('.headerText').html('Ondersteuning');
+  $('#description').text('Hier kunt u vragen stellen aan de techinische staff');
+
+  $('.supportDiv').css('display', 'flex');
+  $('.supportDiv').show(400);
+}
 
 function createNewClass(className) {
 
@@ -396,5 +446,20 @@ function createNewStudent(studentData) {
   } else {
     $('.loader').show(100);
     socketCreateNewStudent(studentData);
+  }
+}
+
+
+function createTicket(ticketData) {
+
+  if (document.getElementById('ticketField').value == "") {
+    alert('Vul eerst wat in');
+  } else {
+    ticketData = {
+      id: user.uid,
+      name: user.displayName,
+      message: document.getElementById('ticketField').value
+    };
+    socketEmitTicket(ticketData);
   }
 }
