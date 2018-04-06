@@ -98,6 +98,7 @@ function hideAllViews() {
   $('.classCard').remove('.classCard');
   $('.studentCard').remove('.studentCard');
   $('.singleStudentCard').remove('.singleStudentCard');
+  closePopup();
   clearArrays();
   clearCards();
 }
@@ -264,6 +265,7 @@ function getAllStudents () {
     clearArrays();
     clearCards();
     switchPage('allStudents');
+    $('.loader').show(100);
 
     var classesRef = db.collection('teachers').doc(data.uid);
     var getDoc = classesRef.get()
@@ -282,6 +284,8 @@ function getAllStudents () {
                   allStudents = true;
                   getStudents(allStudents);
                 }
+                $('.loader').hide(0);
+
             }
   })
 
@@ -473,6 +477,7 @@ function createTicket(ticketData) {
       message: document.getElementById('ticketField').value
     };
     socketEmitTicket(ticketData);
+    document.getElementById('ticketField').value = "";
   }
 }
 

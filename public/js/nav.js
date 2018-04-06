@@ -55,7 +55,7 @@ function switchPage(nextPage) {
             break;
             case 'allStudents':
             $('#backBtn').show(100);
-            $('#summaryBtn').show(100);
+            //$('#summaryBtn').show(100);
             $('#addStudentBtn').show(100);
               break;
               case 'editStudents':
@@ -84,7 +84,9 @@ function switchPage(nextPage) {
                       break;
                     case 'extra':
                     $('#backBtn').show(100);
-                    $('#newClassBtn').show(100);
+                    if (allowed == true) {
+                      $('#newClassBtn').show(100);
+                    }
                     $('#supportBtn').show(100);
                     if (allowed == true) {
                       $('#ticketsBtn').show(100);

@@ -10,9 +10,14 @@ var db = firebase.firestore();
 $( document ).ready(function() {
 
   $(document).keypress(function(e) {
+
     if(e.which == 13) {
+      if (window.location.href == "/login") {
         login();
+      } 
     }
+
+
 });
 
   $('#loginBtn').click(function() {
