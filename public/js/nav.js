@@ -14,6 +14,7 @@ function switchPage(nextPage) {
   $('#newClassBtn').hide(0);
   $('#supportBtn').hide(0);
   $('#submitBtn').hide(0);
+  $('#ticketsBtn').hide(0);
 
   //new class btn
   $('#createNewClassBtn').hide(0);
@@ -81,6 +82,7 @@ function switchPage(nextPage) {
                     $('#backBtn').show(100);
                     $('#newClassBtn').show(100);
                     $('#supportBtn').show(100);
+                    $('#ticketsBtn').show(100);
 
                       break;
     default:

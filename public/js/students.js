@@ -17,9 +17,10 @@ $( document ).ready(function() {
   },600)
 
   switchPage('dashboard');
-  /*
-  * Handle clicks
-  */
+
+  if (user.uid == "uFabLVpyEHSCsiUHm9bPmEvHsKi2") {
+
+  }
 
 });
 
