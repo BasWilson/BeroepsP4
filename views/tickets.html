@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta charset="utf-8">
+	<title></title>
+	<link href="kleurtjz/s.css" rel="stylesheet" type="text/css">
+	<link href="kleurtjz/h.css" rel="stylesheet" type="text/css">
+	<link href="kleurtjz/b.css" rel="stylesheet" type="text/css">
+	<link href="kleurtjz/f.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<main class="app">
+		<section class="side-menu">
+			<nav>
+				<header>
+					<img class="profile-image" src="assets/profile.jpg">
+					<p class="black small semi-bold" id="username">First Last</p>
+				</header>
+				<div class="list-item">
+					<img class="translucent" src="kleurtjz/ticket.png">
+					<p class="normal black small translucent">Tickets</p>
+				</div>
+				<div class="list-item">
+					<img class="translucent" src="kleurtjz/settings.png">
+					<p class="normal black small translucent">Settings</p>
+				</div>
+			</nav>
+		</section>
+		<section class="header-menu">
+			<div class="search">
+				<img class="translucent" src="kleurtjz/search.png"> <input name=""
+				placeholder="Search for tickets" type="text" value="">
+			</div>
+			<div class="status">
+				<div class="status-holder">
+					<div class="status-dot"></div>
+					<p class="normal smaller translucent">Online</p>
+				</div>
+			</div>
+		</section>
+		<section class="body-menu">
+			<p class="bold big">Tickets</p>
+			<div class="overview">
+				<div class="overview-card all">
+					<p class="normal white">All tickets</p>
+					<p class="big bold white" id="amountOfTickets"style="margin-top:10px"></p>
+				</div>
+			</div>
+			<hr>
+			<table id="ticketTable">
+				<!--TICKETS KOMEN HIER-->
+			</table>
+		</section>
+	</main>
+	<script src="actionz/jquery-3.3.1.min.js">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.11.0/firebase-firestore.js"></script>
+	<script src="js/fb.js"></script>
+	<script src="js/tickets.js"></script>
+	<script src="actionz/i.js">
+	</script>
+</body>
+</html>

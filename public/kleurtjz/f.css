@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+.normal {
+	font-family: Roboto;
+	font-weight: 400;
+}
+
+.semi-bold {
+	font-family: Roboto;
+	font-weight: 500;
+}
+
+.bold {
+	font-family: Roboto;
+	font-weight: 700;
+}
+
+.smallest {
+	font-size: 10px;
+}
+
+.smaller {
+	font-size: 14px;
+}
+
+.small {
+	font-size: 16px;
+}
+
+.big {
+	font-size: 36px;
+}
+
+.white {
+	color: white;
+}
+
+.black {
+	color: black;
+}
+
+.translucent {
+	opacity: 0.5;
+}
+
+.non-translucent {
+	opacity: 1!important;
+}

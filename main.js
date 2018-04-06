@@ -10,7 +10,9 @@ var randomFloat = require('random-float');
 var students = require('./modules/students');
 var classes = require('./modules/classes');
 var fb = require('./modules/fb');
-var supportTickets = {};
+var ticketID = [];
+var ticketMessage = [];
+var ticketName = [];
 
 //HANDLE PAGES HERE
 app.use(express.static(path.join(__dirname, 'public')));
@@ -21,6 +23,10 @@ res.sendFile(__dirname + '/views/dashboard.htm');
 app.get('/dashboard', function(req, res){
 res.sendFile(__dirname + '/views/dashboard.htm');
 });
+app.get('/tickets', function(req, res){
+res.sendFile(__dirname + '/views/tickets.html');
+});
+
 
 app.get('/login', function(req, res){
 res.sendFile(__dirname + '/views/login.htm');
@@ -75,13 +81,20 @@ io.on('connection', function(socket){
   });
 
   socket.on('supportTicket', function(ticketData){
-    supportTickets[ticketData.id] = {
-      id: ticketData.id,
-      name: ticketData.name,
-      message: ticketData.message
-    };
-    console.log(supportTickets);
+
+    ticketID.push(ticketID.length);
+    ticketName.push(ticketData.name);
+    ticketMessage.push(ticketData.message);
   });
+  socket.on('getTickets', function(){
+    var ticketData = {
+      ticketID: ticketID,
+      ticketName: ticketName,
+      ticketMessage: ticketMessage
+    };
+    socket.emit('tickets', ticketData);
+  });
+
 });
 http.listen(10000, function(){
   console.log('Beoordelings Systeem server opgestart');
