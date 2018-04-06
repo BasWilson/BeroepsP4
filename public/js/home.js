@@ -102,3 +102,11 @@ $('#submitBtn').click(function () {
   hideAllViews();
   showDashboard();
 });
+
+$('#setNameBtn').click(function () {
+  saveName();
+});
+
+$('#ticketsBtn').click(function () {
+  window.location.href = "tickets";
+});

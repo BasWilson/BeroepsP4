@@ -5,8 +5,14 @@ $( document ).ready(function() {
 
   setTimeout(function() {
     user = firebase.auth().currentUser;
-    checkIfSignedIn();
+    if (user.uid == "uFabLVpyEHSCsiUHm9bPmEvHsKi2") {
+        allowed = true;
+        checkIfSignedIn();
+      } else {
+        window.location.href = "/login";
+      }
   },600)
+
 });
 
 function checkIfSignedIn() {

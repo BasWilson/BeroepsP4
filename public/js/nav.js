@@ -19,6 +19,9 @@ function switchPage(nextPage) {
   //new class btn
   $('#createNewClassBtn').hide(0);
 
+  //profile
+  $('#setNameBtn').hide(0);
+
   //create new student view
   $('#createNewStudentBtn').hide(0);
 
@@ -33,6 +36,7 @@ function switchPage(nextPage) {
   switch (nextPage) {
     case 'profile':
       $('#backBtn').show(100);
+      $('#setNameBtn').show(100);
       break;
       case 'dashboard':
       $('#classesBtn').show(100);
@@ -82,7 +86,9 @@ function switchPage(nextPage) {
                     $('#backBtn').show(100);
                     $('#newClassBtn').show(100);
                     $('#supportBtn').show(100);
-                    $('#ticketsBtn').show(100);
+                    if (allowed == true) {
+                      $('#ticketsBtn').show(100);
+                    }
 
                       break;
     default:

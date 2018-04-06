@@ -4,6 +4,7 @@
 var currentView;
 var data;
 var user;
+var allowed;
 var dbFNames = [], dbLNames = [], dbPoints = [], dbAvatars = [], dbNegativePoints = [];
 var totalStudents, totalPoints;
 var negativePointsChart, positivePointsChart;
@@ -18,9 +19,19 @@ $( document ).ready(function() {
 
   switchPage('dashboard');
 
+  setTimeout(function() {
   if (user.uid == "uFabLVpyEHSCsiUHm9bPmEvHsKi2") {
-
+      allowed = true;
+    } else {
+      allowed = false;
+    }
+  },600);
+  setTimeout(function() {
+  if (user == undefined) {
+    window.location.reload();
   }
+},1000);
+
 
 });
 
@@ -113,7 +124,7 @@ function showProfile() {
   switchPage('profile');
 
   $('.loader').hide(100);
-  $('#teacherName').html('<strong>'+data.name+'</strong>');
+  document.getElementById('teacherName').value = data.name;
   $('.headerText').text('Profiel');
   $('#description').text('Hier kunt u uw profiel bekijken en aanpassen');
   $('.profileCardDiv').css('display', 'flex');
@@ -463,4 +474,28 @@ function createTicket(ticketData) {
     };
     socketEmitTicket(ticketData);
   }
+}
+
+function saveName(name) {
+  name = $('#teacherName').val();
+
+    user.updateProfile({
+    displayName: name
+  }).then(function() {
+    // Update successful.
+    fadeColor('teacherName','backgroundColor', 'rgb(66, 244, 125)');
+    checkIfSignedIn();
+  }).catch(function(error) {
+    // An error happened.
+    fadeColor('teacherName','backgroundColor', 'red');
+  });
+}
+
+function fadeColor(id, property, color) {
+    var oProperty = $('#'+id+'').css(property);
+
+    $('#'+id+'').css(property, color);
+    setTimeout(function() {
+      $('#'+id+'').css(property, oProperty);
+    },1000);
 }
