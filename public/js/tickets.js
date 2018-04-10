@@ -1,5 +1,6 @@
 var user, amountOfTickets;
 var socket = io();
+var responseData, tickets;
 
 $( document ).ready(function() {
 
@@ -19,7 +20,7 @@ function checkIfSignedIn() {
   firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     document.getElementById('username').innerHTML = user.displayName;
-    getTickets();
+    socket.emit('getTickets');
   } else {
     // Er is niemand ingelogd
     window.location.href = "/login";
@@ -27,20 +28,61 @@ function checkIfSignedIn() {
 });
 }
 
-function getTickets() {
-  socket.emit('getTickets');
-}
-
 socket.on('tickets', function (ticketData) {
   handleTickets(ticketData)
 });
+
 function handleTickets(ticketData) {
+  $( "#ticketTable" ).empty();
+  var ticket = '<tr><th>Ticket ID</th><th>Email</th><th>Naam</th><th>Datum</th></tr>';
+  $('#ticketTable').append(ticket);
+  tickets = ticketData;
+
   amountOfTickets = 0;
-  for (var i = 0; i < ticketData.ticketID.length; i++) {
+  for (var i = 0; i < ticketData.ticketName.length; i++) {
     amountOfTickets++;
-    var ticket = '<tr><td>#'+ticketData.ticketID[i]+'</td><td>'+ticketData.ticketMessage[i]+'</td><td>-</td><td>'+ticketData.ticketName[i]+'</td></tr>';
+    var ticket = '<tr><td>#'+i+'</td><td>'+ticketData.ticketEmail[i]+'</td><td>'+ticketData.ticketName[i]+'</td><td>'+ticketData.ticketDate[i]+'</td><td id="'+i+'" style="color: red"onclick="deleteTicket(this.id)">Verwijder</td><td onclick="viewTicket(this.id)" id="'+i+'">Bekijk</td></tr>';
     $('#ticketTable').append(ticket);
   }
   document.getElementById('amountOfTickets').innerHTML = amountOfTickets
 
+}
+
+function viewTicket(id) {
+  $('.viewContainer').show();
+  document.getElementById('ticketId').innerHTML = "Ticket ID: "+ id;
+  document.getElementById('ticketTitle').innerHTML = "Naam: "+ tickets.ticketName[id];
+  document.getElementById('ticketEmail').innerHTML = "Email: "+ tickets.ticketEmail[id];
+  document.getElementById('ticketMessage').innerHTML = "Bericht: "+tickets.ticketMessage[id];
+  responseData = {
+    id: id,
+    name: tickets.ticketName[id],
+    email: tickets.ticketEmail[id],
+    message: tickets.ticketMessage[id],
+    response: 0
+  };
+}
+function closePopup() {
+  $('.viewContainer').hide();
+}
+
+function sendTicket() {
+  if (document.getElementById('response').value == "") {
+    alert('Voer tekst in');
+  } else {
+    responseData.response = document.getElementById('response').value;
+    closePopup();
+    socket.emit('ticketResponse', responseData);
+  }
+}
+
+function deleteTicket() {
+  if (responseData.id != null || responseData.id != undefined) {
+    socket.emit('deleteTicket', responseData.id);
+    closePopup();
+    $('#ticketTable').empty();
+
+    socket.emit('getTickets');
+
+  }
 }

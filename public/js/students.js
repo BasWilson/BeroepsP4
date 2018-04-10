@@ -471,10 +471,13 @@ function createTicket(ticketData) {
   if (document.getElementById('ticketField').value == "") {
     alert('Vul eerst wat in');
   } else {
+    var d = new Date();
+
     ticketData = {
-      id: user.uid,
+      email: user.email,
       name: user.displayName,
-      message: document.getElementById('ticketField').value
+      message: document.getElementById('ticketField').value,
+      time: d.toDateString()
     };
     socketEmitTicket(ticketData);
     document.getElementById('ticketField').value = "";

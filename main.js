@@ -5,14 +5,18 @@ var path = require('path')
 var io = require('socket.io')(http);
 var sha256 = require('js-sha256');
 var randomFloat = require('random-float');
+var fs = require('fs');
 
 //Modules
 var students = require('./modules/students');
 var classes = require('./modules/classes');
 var fb = require('./modules/fb');
-var ticketID = [];
-var ticketMessage = [];
-var ticketName = [];
+var tickets = {
+  ticketMessage: [],
+  ticketName: [],
+  ticketDate: [],
+  ticketEmail: []
+};
 
 //HANDLE PAGES HERE
 app.use(express.static(path.join(__dirname, 'public')));
@@ -80,19 +84,62 @@ io.on('connection', function(socket){
     fb.addClassToDB(name, socket);
   });
 
+  ///TICKETS
   socket.on('supportTicket', function(ticketData){
 
-    ticketID.push(ticketID.length);
-    ticketName.push(ticketData.name);
-    ticketMessage.push(ticketData.message);
-  });
+    fs.readFile('tickets.json', 'utf8', function (err, data) {
+      if (err) throw err;
+      tickets = JSON.parse(data);
+
+      tickets.ticketEmail.push(ticketData.email);
+      tickets.ticketName.push(ticketData.name);
+      tickets.ticketMessage.push(ticketData.message);
+      tickets.ticketDate.push(ticketData.time);
+      var json = JSON.stringify(tickets);
+      socket.emit('tickets', tickets);
+      fs.writeFile('tickets.json', json, 'utf8');
+    });
+
+});
+
   socket.on('getTickets', function(){
-    var ticketData = {
-      ticketID: ticketID,
-      ticketName: ticketName,
-      ticketMessage: ticketMessage
-    };
-    socket.emit('tickets', ticketData);
+
+    fs.readFile('tickets.json', 'utf8', function (err, data) {
+      if (err) throw err;
+      tickets = JSON.parse(data);
+      socket.emit('tickets', tickets);
+    });
+
+  });
+
+  socket.on('ticketResponse', function(responseData){
+    students.sendResponse(responseData);
+});
+
+  socket.on('deleteTicket', function(responseData){
+    fs.readFile('tickets.json', 'utf8', function (err, data) {
+      if (err) throw err;
+      tickets = JSON.parse(data);
+
+      tickets.ticketEmail.splice(responseData, 1);
+      tickets.ticketName.splice(responseData, 1);
+      tickets.ticketMessage.splice(responseData, 1);
+      tickets.ticketDate.splice(responseData, 1);
+
+      if (tickets.ticketEmail.length >= 0) {
+
+      } else {
+        tickets = {
+          ticketMessage: [],
+          ticketName: [],
+          ticketDate: [],
+          ticketEmail: []
+        };
+      }
+
+      var json = JSON.stringify(tickets);
+      fs.writeFile('tickets.json', json, 'utf8');
+    });
   });
 
 });

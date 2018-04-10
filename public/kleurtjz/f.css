@@ -45,3 +45,52 @@
 .non-translucent {
 	opacity: 1!important;
 }
+
+
+.viewContainer {
+	width: 100%;
+	height: auto;
+	background-color: white;
+	z-index: 9999;
+	color: black;
+	font-family: Roboto;
+	display: flex;
+	flex-direction:column;
+	display: none;
+	font-weight: bold;
+	position: relative;
+	border-bottom: 2px black;
+}
+
+.ticketResponse {
+	display: flex;
+	flex-direction:column;
+	margin: auto;
+	width: 80%;
+}
+
+.closebtn {
+	position:absolute;
+	right: 10px;
+	top: 10px;
+	font-size: 28px;
+	cursor: pointer;
+}
+
+.textfield {
+	border-radius: 6px;
+	background-color: white;
+	border: 1px solid grey;
+	padding: 10px;
+}
+
+.button {
+	border-radius: 6px;
+	background-color: white;
+	padding: 10px;
+	width: 200px;
+	border: 1px solid grey
+}
+.button:hover {
+	cursor: pointer;
+}
