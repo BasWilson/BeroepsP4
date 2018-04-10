@@ -41,7 +41,7 @@ function handleTickets(ticketData) {
   amountOfTickets = 0;
   for (var i = 0; i < ticketData.ticketName.length; i++) {
     amountOfTickets++;
-    var ticket = '<tr><td>#'+i+'</td><td>'+ticketData.ticketEmail[i]+'</td><td>'+ticketData.ticketName[i]+'</td><td>'+ticketData.ticketDate[i]+'</td><td id="'+i+'" style="color: red"onclick="deleteTicket(this.id)">Verwijder</td><td onclick="viewTicket(this.id)" id="'+i+'">Bekijk</td></tr>';
+    var ticket = '<tr><td>#'+i+'</td><td>'+ticketData.ticketEmail[i]+'</td><td>'+ticketData.ticketName[i]+'</td><td>'+ticketData.ticketDate[i]+'</td><td id="delete'+i+'" style="color: red"onclick="deleteTicket(this.id)">Verwijder</td><td onclick="viewTicket(this.id)" id="'+i+'">Bekijk</td></tr>';
     $('#ticketTable').append(ticket);
   }
   document.getElementById('amountOfTickets').innerHTML = amountOfTickets
@@ -76,9 +76,9 @@ function sendTicket() {
   }
 }
 
-function deleteTicket() {
-  if (responseData.id != null || responseData.id != undefined) {
-    socket.emit('deleteTicket', responseData.id);
+function deleteTicket(id) {
+  if (id != null || id != undefined) {
+    socket.emit('deleteTicket', id);
     closePopup();
     $('#ticketTable').empty();
 

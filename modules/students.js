@@ -16,7 +16,7 @@ module.exports = {
 
       // setup email data with unicode symbols
       let mailOptions = {
-          from: '"Beoordelings Systeem" <tickets@onpointcoding.nl>', // sender address
+          from: '"Beoordelings Systeem" <tickets@onpointcoding.com>', // sender address
           to: responseData.email, // list of receivers
           subject: 'Uw vraag over het beoordelings systeem', // Subject line
           html: '<h3>Beste '+responseData.name+',</h3><p> Uw vraag: '+responseData.message+' <br> <br> Ons antwoord: '+responseData.response+'.<br><br> <b>Wij hopen dat dit uw antwoord u genoeg heeft geholpen!</b><br><br></p>' // html body
