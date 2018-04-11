@@ -408,6 +408,7 @@ function openNewStudent() {
 
   $('.newStudentDiv').css('display', 'flex');
   $('.newStudentDiv').show(400);
+  switchPage('newStudent');
 }
 
 function openExtra() {
@@ -447,6 +448,8 @@ function createNewClass(className) {
 }
 
 function createNewStudent(studentData) {
+
+  switchPage('newStudent');
 
   studentData = {
     firstname: $('#firstNameField').val(),

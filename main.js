@@ -30,8 +30,6 @@ res.sendFile(__dirname + '/views/dashboard.htm');
 app.get('/tickets', function(req, res){
 res.sendFile(__dirname + '/views/tickets.html');
 });
-
-
 app.get('/login', function(req, res){
 res.sendFile(__dirname + '/views/login.htm');
 });

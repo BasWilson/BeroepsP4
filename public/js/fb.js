@@ -12,9 +12,9 @@ $( document ).ready(function() {
   $(document).keypress(function(e) {
 
     if(e.which == 13) {
-      if (window.location.href == "/login") {
+      if (window.location.pathname == "/login") {
         login();
-      } 
+      }
     }
 
 
